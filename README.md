@@ -49,7 +49,7 @@ athId,regId,divId,lastName,firstName,gender,age,weight,height,affiliateId,affili
 ~~~
 
 Le premier champ correspond à l'identifiant de l'athlète (`180541`), le
-quatrième à son nom de famille `Vigneault`, le cinquième à son prénom `Alex`... En ce qui concerne les champs après `overallRank` ils correspondent au nom de l'épreuve (`18.1` signifiant première épreuve de l'édition 2018). Comme pour toutes les éditions, il y a 5 épreuves par compétition. Pour plus de détails sur chacun des champs, vous pouvez consulter l'annexe
+quatrième à son nom de famille `Vigneault`, le cinquième à son prénom `Alex`... En ce qui concerne les champs après `overallRank` ils correspondent au nom de l'épreuve (`18.1` signifiant première épreuve de l'édition 2018). Comme pour toutes les éditions, il y a 5 épreuves par compétition. Pour plus de détails sur chacun des champs, vous pouvez consulter l'annexe.
 
 ## Annexe
 
@@ -80,17 +80,17 @@ quatrième à son nom de famille `Vigneault`, le cinquième à son prénom `Alex
 
 ~~~
 Complete as many rounds as possible in 20 minutes of:
-8 toes-to-bars
-10 dumbbell hang clean and jerks
-14-cal. row
+- 8 toes-to-bars
+- 10 dumbbell hang clean and jerks
+- 14-cal. row
 ~~~
 
 - [Workout 18.2](https://games.crossfit.com/workouts/open/2018/2)
 
 ~~~
 1-2-3-4-5-6-7-8-9-10 reps for time of:
-Dumbbell squats
-Bar-facing burpees
+- Dumbbell squats
+- Bar-facing burpees
 
 Workout 18.2a
 1-rep-max clean
@@ -102,14 +102,14 @@ Time cap: 12 minutes to complete 18.2 AND 18.2a
 
 ~~~
 2 rounds for time of:
-100 double-unders
-20 overhead squats
-100 double-unders
-12 ring muscle-ups
-100 double-unders
-20 dumbbell snatches
-100 double-unders
-12 bar muscle-ups
+- 100 double-unders
+- 20 overhead squats
+- 100 double-unders
+- 12 ring muscle-ups
+- 100 double-unders
+- 20 dumbbell snatches
+- 100 double-unders
+- 12 bar muscle-ups
 
 Time cap: 14 minutes
 ~~~
