@@ -85,7 +85,12 @@ void read_csv_file(const char * filename)
 
         while (NULL != token)
         {
-            if (IS_DEBUG) printf("Field %d is %s\n", i++, token); // you can strcpy the `token` string in your data structures
+            if (IS_DEBUG) printf("Field %d is %s\n", i++, token);
+
+            // ...
+            // you can strcpy the `token` string in your data structures
+            // ...
+
             token = strtok(NULL, CSV_DELIMITERS);
         }
     }
