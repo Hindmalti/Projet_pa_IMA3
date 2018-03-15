@@ -237,3 +237,11 @@ Time cap: 12 minutes to complete 18.2 AND 18.2a
 
 Time cap: 14 minutes
 ~~~
+
+- [Workout 18.4](https://games.crossfit.com/workouts/open/2018/4)
+
+    disponible le 16 mars
+
+- [Workout 18.5](https://games.crossfit.com/workouts/open/2018/5)
+
+    disponible le 23 mars
