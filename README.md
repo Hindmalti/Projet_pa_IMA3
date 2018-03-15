@@ -124,6 +124,24 @@ avec le fichier `requetes.txt` qui contient par exemple:
 7
 ~~~
 
+## Précisions sur les requêtes
+
+Pour toutes les requêtes du type _donne le top 50..._ ou _donne le classement..._, on attend un résultat du type
+
+~~~
+01   nom    prenom  score
+02   nom    prenom  score
+...
+~~~
+
+Pour toutes les requêtes du type _recherche..._, on attend un résultat du type
+
+~~~
+athId nom prenom genre age taille poids score18.1 score18.2 score 18.2a score18.3 score18.4 score18.5
+~~~
+
+Vous prendrez soin d'avoir des résultats qui utilisent le système international d'unités (masse en kg et longueur en m)
+
 ## Déliverables
 
 > La date de fin de projet est le dimanche 3 juin 2018 23:59 CEST. Tout retard entraînera des pénalités.
