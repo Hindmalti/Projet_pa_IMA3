@@ -51,7 +51,109 @@ athId,regId,divId,lastName,firstName,gender,age,weight,height,affiliateId,affili
 Le premier champ correspond à l'identifiant de l'athlète (`180541`), le
 quatrième à son nom de famille `Vigneault`, le cinquième à son prénom `Alex`... En ce qui concerne les champs après `overallRank` ils correspondent au nom de l'épreuve (`18.1` signifiant première épreuve de l'édition 2018). Comme pour toutes les éditions, il y a 5 épreuves par compétition. Pour plus de détails sur chacun des champs, vous pouvez consulter l'annexe.
 
-## Annexe
+## Cahier des charges
+
+Il vous est demandé de réaliser un programme qui charge le fichier de données `CSV` (il est disponible dans le répertoire `data`) et qui permet d'interroger facilement ce fichier. Il doit être possible de :
+
+- Donner le top 50 (_i.e._ les 50 premiers)
+- Donner le top 50 hommes uniquement ou femmes uniquement
+- Donner le top 50 d'une région donnée
+- Donner le top 50 d'une division donnée
+- Donner le top 50 d'une épreuve donnée
+- Rechercher un athlète via son identifiant (`athId`)
+- Rechercher les athlètes par nom de famille
+- Donner le classement d'une salle de CrossFit donnée via son identifiant (`affiliateId`)
+- Donner le classement des adhérents des salles de la métropole lilloise
+
+Le volume de données est important, par conséquent un soin particulier devra être apporté aux structures de données utilisées et à la rapidité d'exécution de votre programme. Les choix algorithmiques devront obligatoirement être expliqués et justifiés dans votre rapport.
+
+Pour permettre d'évaluer automatiquement la performance de votre programme et permettre une utilisation automatique par redirection, votre programme devra fonctionner de la manière suivante :
+
+1. charger le fichier de données
+2. attendre une commande
+3. traiter la commande
+4. afficher le résultat de cette commande
+5. revenir à l'étape 2
+
+Les commandes seront les suivantes:
+
+- `1`       : donne le top 50
+- `2 M|F`   : donne le top 50 hommes ou femmes
+- `3 id`    : donne le top 50 d'une région donnée par `id`
+- `4 id`    : donne le top 50 d'une division donnée par `id`
+- `5 ep`    : donne le top 50 d'une épreuve donnée (`ep` vaut entre `[1,5]`)
+- `6 id`    : recherche un athlète via son identifiant `id`
+- `7 name`  : recherche les athlètes dont le nom de famille est `name`
+- `8 id`    : donne le classement d'une salle de CrossFit via son identifiant `id`
+- `9`       : donne le classement des adhèrents des salles de la métropole lilloise
+- `10`      : quitte
+
+Ainsi si votre exécutable s'appelle `projet_pa` il doit être possible de l'utiliser de la manière suivante:
+
+~~~
+$ ./projet_pa < data/requetes.txt
+~~~
+
+avec le fichier `requetes.txt` qui contient par exemple:
+
+~~~
+1
+2 M
+3 18
+4 1
+5 4
+6 881332
+7 Vigneault
+8 12020
+9
+6 670954
+6 553467
+6 98546
+6 344299
+6 1033765
+6 190466
+6 3774
+6 236854
+6 1006179
+6 263196
+6 911088
+6 236032
+6 288309
+6 173209
+2 F
+7
+~~~
+
+## Déliverables
+
+> La date de fin de projet est le dimanche 3 juin 2018 23:59 CEST. Tout retard entraînera des pénalités.
+
+Vous n'avez rien à imprimer, ni des documents à envoyer par e-mail. Il faudra donner l'accès du dépôt à votre correcteur et celui-ci corrigera à partir de la dernière version du dépôt ou de la branche `release` (si elle existe) avant la date limite. Les `push` qui suivraient la date limite ne seront pas considérés.
+
+Sur votre dépôt devront figurer :
+
+- le code source correctement commenté et indenté
+- un `Makefile` pour la compilation automatique
+- un `README.md` décrivant l'utilisation de votre programme
+- un rapport au format PDF ou un fichier `Rapport.md` (les autres formats ne sont pas acceptés) de 10 pages maximum qui explique vos choix de structures de données, vos choix de conception algorithmique et les principales étapes du déroulement de votre programme.
+
+## Annexes
+
+### Pour démarrer
+
+Pour commencer à travailler, vous pouvez faire un fork du dépôt qui contient le fichier `README.md` que vous êtes en train de lire. Ne pas oublier d'ajouter votre correcteur dans la liste des personnes ayant accès à votre dépôt (menu `Settings` à droite puis Menu `Members` puis bouton `New Projet Member`).
+
+On rappelle brièvement les commandes `GIT` que vous serez amené à utiliser :
+
+- `git help cmd` : pour avoir de l'aide sur la commande `cmd`
+- `git add fichier` : pour ajouter au dépôt un nouveau fichier ou un fichier modifié
+- `git commit -m "message qui explique les modifications"` : pour sauvegarder les modifications dans le dépôt local
+- `git push` : pour mettre à jour le serveur avec votre version du dépôt
+- `git pull` : pour récupérer la dernière version du serveur
+- `git status`: pour voir l'état de votre dépôt local par rapport au serveur
+- `git log --pretty=format:"%h - %an, %ar : %s"`: afficher le log des commits
+
+N'hésitez pas à vous référer au polycopié de programmation avancée pour les détails de chacune des commandes.
 
 ### Description des champs du tableau `CSV`
 
@@ -71,6 +173,10 @@ quatrième à son nom de famille `Vigneault`, le cinquième à son prénom `Alex
 - `18.x score`          : score de la __x__ ième épreuve [`entier`]
 - `18.x scoreDisplay`   : résultat de la __x__ ième épreuve, nombre de répétitions (_reps_) ou temps ou charge (_lbs_) [`chaîne de caractères`]
 - `18.x rank`           : classement de la __x__ ième épreuve [`entier`]
+
+### Liste des salles de CrossFit de la métropole lilloise
+
+Elle se trouve dans le répertoire `data` du dépôt `GIT.
 
 ### Détail des épreuves
 
