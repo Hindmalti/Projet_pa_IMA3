@@ -240,7 +240,23 @@ Time cap: 14 minutes
 
 - [Workout 18.4](https://games.crossfit.com/workouts/open/2018/4)
 
-    disponible le 16 mars
+~~~
+For time:
+21 deadlifts, 225 lb.
+21 handstand push-ups
+15 deadlifts, 225 lb.
+15 handstand push-ups
+9 deadlifts, 225 lb.
+9 handstand push-ups
+21 deadlifts, 315 lb.
+50-ft. handstand walk
+15 deadlifts, 315 lb.
+50-ft. handstand walk
+9 deadlifts, 315 lb.
+50-ft. handstand walk
+
+Time cap: 9 min.
+~~~
 
 - [Workout 18.5](https://games.crossfit.com/workouts/open/2018/5)
 
