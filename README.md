@@ -58,7 +58,6 @@ Il vous est demandé de réaliser un programme qui charge le fichier de données
 - Donner le top 50 (_i.e._ les 50 premiers)
 - Donner le top 50 hommes uniquement ou femmes uniquement
 - Donner le top 50 d'une région donnée
-- Donner le top 50 d'une division donnée
 - Donner le top 50 d'une épreuve donnée
 - Rechercher un athlète via son identifiant (`athId`)
 - Rechercher les athlètes par nom de famille
@@ -80,13 +79,12 @@ Les commandes seront les suivantes:
 - `1`       : donne le top 50
 - `2 M|F`   : donne le top 50 hommes ou femmes
 - `3 id`    : donne le top 50 d'une région donnée par `id`
-- `4 id`    : donne le top 50 d'une division donnée par `id`
-- `5 ep`    : donne le top 50 d'une épreuve donnée (`ep` vaut entre `[1,5]`)
-- `6 id`    : recherche un athlète via son identifiant `id`
-- `7 name`  : recherche les athlètes dont le nom de famille est `name`
-- `8 id`    : donne le classement d'une salle de CrossFit via son identifiant `id`
-- `9`       : donne le classement des adhèrents des salles de la métropole lilloise
-- `10`      : quitte
+- `4 ep`    : donne le top 50 d'une épreuve donnée (`ep` vaut entre `[1,5]`)
+- `5 id`    : recherche un athlète via son identifiant `id`
+- `6 name`  : recherche les athlètes dont le nom de famille est `name`
+- `7 id`    : donne le classement d'une salle de CrossFit via son identifiant `id`
+- `8`       : donne le classement des adhèrents des salles de la métropole lilloise
+- `9`      : quitte
 
 Ainsi si votre exécutable s'appelle `projet_pa` il doit être possible de l'utiliser de la manière suivante:
 
@@ -101,27 +99,26 @@ avec le fichier `requetes.txt` qui contient par exemple:
 2 M
 3 18
 4 1
-5 4
-6 881332
-7 Vigneault
-8 12020
-9
-6 670954
-6 553467
-6 98546
-6 344299
-6 1033765
-6 190466
-6 3774
-6 236854
-6 1006179
-6 263196
-6 911088
-6 236032
-6 288309
-6 173209
+5 881332
+6 Vigneault
+7 12020
+8
+5 670954
+5 553467
+5 98546
+5 344299
+5 1033765
+5 190466
+5 3774
+5 236854
+5 1006179
+5 263196
+5 911088
+5 236032
+5 288309
+5 173209
 2 F
-7
+9
 ~~~
 
 ## Précisions sur les requêtes
@@ -177,7 +174,7 @@ N'hésitez pas à vous référer au polycopié de programmation avancée pour le
 
 - `athId`               : identifiant de l'athlète [`entier`]
 - `regId`               : identifiant de la région du monde, voir [ici](https://games-support.crossfit.com/article/100-what-are-the-boundaries-of-the-crossfit-games-regions-what-states-countries-are-included-in-each) [`entier`]
-- `divId`               : la division de l'athlète (catégorie en fonction de l'âge) [`entier`]
+- `divId`               : la division de l'athlète (catégorie en fonction de l'âge) [`entier`] (* vaut 1 pour les hommes et 2 pour les femmes)
 - `lastName`            : nom de famille [`chaîne de caractères`]
 - `firstName`           : prénom [`chaîne de caractères`]
 - `gender`              : genre (M ou F) [`caractère`]
