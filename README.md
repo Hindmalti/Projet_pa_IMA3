@@ -193,7 +193,7 @@ curl http://www.dequidt.me/documents/IMA3.PA/projet_2018/final_ranking_000010.cs
 
 - `athId`               : identifiant de l'athlète [`entier`]
 - `regId`               : identifiant de la région du monde, voir [ici](https://games-support.crossfit.com/article/100-what-are-the-boundaries-of-the-crossfit-games-regions-what-states-countries-are-included-in-each) [`entier`]
-- `divId`               : la division de l'athlète (catégorie en fonction de l'âge) [`entier`] (* vaut 1 pour les hommes et 2 pour les femmes)
+- `divId`               : la division de l'athlète (catégorie en fonction de l'âge) [`entier`], vaut 1 pour les hommes et 2 pour les femmes
 - `lastName`            : nom de famille [`chaîne de caractères`]
 - `firstName`           : prénom [`chaîne de caractères`]
 - `gender`              : genre (M ou F) [`caractère`]
