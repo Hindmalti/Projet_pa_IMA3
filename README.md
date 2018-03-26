@@ -257,4 +257,20 @@ Time cap: 9 min.
 
 - [Workout 18.5](https://games.crossfit.com/workouts/open/2018/5)
 
-    disponible le 23 mars
+~~~
+Complete as many reps as possible in 7 minutes of:
+3 thrusters
+3 chest-to-bar pull-ups
+6 thrusters
+6 chest-to-bar pull-ups
+9 thrusters
+9 chest-to-bar pull-ups
+12 thrusters
+12 chest-to-bar pull-ups
+15 thrusters
+15 chest-to-bar pull-ups
+18 thrusters
+18 chest-to-bar pull-ups
+
+This is a timed workout. If you complete the round of 18, go on to 21. If you complete 21, go on to 24, etc.
+~~~
