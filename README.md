@@ -42,14 +42,14 @@ possibles `\t`, `;`...). La première ligne sert à décrire le nom des différe
 champs. Par exemple sur le fichier qui nous intéresse :
 
 ~~~
-athId,regId,divId,lastName,firstName,gender,age,weight,height,affiliateId,affiliateName,overallScore,overallRank,18.1 score,18.1 scoreDisplay,18.1 rank,18.2 score,18.2 scoreDisplay,18.2 rank,18.3 score,18.3 scoreDisplay,18.3 rank
+athId,regId,divId,lastName,firstName,gender,age,weight,height,affiliateId,affiliateName,overallScore,overallRank,18.1 score,18.1 scoreDisplay,18.1 rank,18.2 score,18.2 scoreDisplay,18.2 rank,18.2a score,18.2a scoreDisplay,18.2a rank
 180541,18,1,Vigneault,Alex,M,26,203 lb,71 in,10990,CrossFit Quebec City,61,1,14720000,472 reps,11,11100455,4:25,42,13750455,375 lb,8
 92567,22,1,Ganin,Andrey,M,34,104 kg,185 cm,20513,CrossFit MDN,175,2,14770000,477 reps,3,11100455,4:25,42,13420455,342 lb,130
 881332,17,1,Vinas,Tommy,M,21,200 lb,71 in,17152,Zero Machine CrossFit,212,3,14490000,449 reps,132,11100452,4:28,58,13650452,365 lb,22
 ~~~
 
 Le premier champ correspond à l'identifiant de l'athlète (`180541`), le
-quatrième à son nom de famille `Vigneault`, le cinquième à son prénom `Alex`... En ce qui concerne les champs après `overallRank` ils correspondent au nom de l'épreuve (`18.1` signifiant première épreuve de l'édition 2018). Comme pour toutes les éditions, il y a 5 épreuves par compétition. Pour plus de détails sur chacun des champs, vous pouvez consulter l'annexe.
+quatrième à son nom de famille `Vigneault`, le cinquième à son prénom `Alex`... En ce qui concerne les champs après `overallRank` ils correspondent au nom de l'épreuve (`18.1` signifiant première épreuve de l'édition 2018). Comme pour toutes les éditions, il y a 5 épreuves par compétition (mais la 2ième épreuve contient un épreuve annexe nommée 18.2a). Pour plus de détails sur chacun des champs, vous pouvez consulter l'annexe.
 
 ## Cahier des charges
 
