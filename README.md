@@ -53,7 +53,7 @@ quatrième à son nom de famille `Vigneault`, le cinquième à son prénom `Alex
 
 ## Cahier des charges
 
-Il vous est demandé de réaliser un programme qui charge le fichier de données `CSV` (il est disponible dans le répertoire `data`) et qui permet d'interroger facilement ce fichier. Il doit être possible de :
+Il vous est demandé de réaliser un programme qui charge le fichier de données `CSV` (voir l'annexe pour obtenir les fichiers) et qui permet d'interroger facilement ce fichier. Il doit être possible de :
 
 - Donner le top 50 (_i.e._ les 50 premiers)
 - Donner le top 50 hommes uniquement ou femmes uniquement
@@ -169,6 +169,25 @@ On rappelle brièvement les commandes `GIT` que vous serez amené à utiliser :
 - `git log --pretty=format:"%h - %an, %ar : %s"`: afficher le log des commits
 
 N'hésitez pas à vous référer au polycopié de programmation avancée pour les détails de chacune des commandes.
+
+### Fichiers `CSV`
+
+Comme les fichiers peuvent être volumineux, ils ne sont pas sur le dépôt GIT pour éviter de longs transferts / ou de saturer votre compte. De plus, pour éviter de travailler directement avec le fichier complet (399500 athlètes, 80 Mo) nous vous avons préparé des fichiers partiels:
+
+~~~
+final_ranking_000010.csv    2.4K    // résultats de 10 athlètes
+final_ranking_000100.csv    20K     // résultats de 100 athlètes
+final_ranking_001000.csv    200K    // résultats de 1000 athlètes
+final_ranking_010000.csv    1.9M    // résultats de 10000 athlètes
+final_ranking_100000.csv    19M     // résultats de 100000 athlètes
+final_ranking_399500.csv    78M     // résultats complets 
+~~~
+
+Ils se situent tous à l'adresse `http://www.dequidt.me/documents/IMA3.PA/projet_2018/` ainsi pour récupérer le plus petit fichier vous pouvez utiliser la commande `curl` via 
+
+~~~
+curl http://www.dequidt.me/documents/IMA3.PA/projet_2018/final_ranking_000010.csv 
+~~~
 
 ### Description des champs du tableau `CSV`
 
