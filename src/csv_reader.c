@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 // Conditionals
-const bool          IS_DEBUG            = false;
+const bool          IS_DEBUG            = true;
 
 // Constants
 const unsigned int  BUFFER_SIZE         = 2048;
