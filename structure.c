@@ -1,6 +1,5 @@
-#include<stdio.h>
-#include<stdlib.h>
-
+#include <stdio.h>
+#include <stdlib.h>
 
 // structure athlète 
 
@@ -36,8 +35,18 @@ typedef struct{
 	unsigned int score18_5;
 	//char *scoreDisplay18_5;
 	unsigned int rank18_5;
-	struct Athlete *suivant;
-}Athlete; 
+}Athlete;
+
+typedef struct Element_TOP_50 Element_TOP_50;
+struct Element_TOP_50 {
+    Athlete ath;
+    Element_TOP_50 *suivant;
+};
+typedef struct {
+    Element_TOP_50 *premier;
+} Liste_TOP_50;
+
+
 /*
 // structure liste chaînée triée 
 typedef struct Element{
@@ -84,8 +93,3 @@ void printListe(Liste liste){
 }
 */
 
-int main(void){
-    printf("Taille sportif %llu pour tout : %llu\n",sizeof(Athlete), 400000*sizeof(Athlete));
-    return 0;
-}
-// 

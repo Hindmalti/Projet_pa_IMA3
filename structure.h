@@ -38,8 +38,16 @@ typedef struct{
 	unsigned int score18_5;
 	//char *scoreDisplay18_5;
 	unsigned int rank18_5;
-	struct Athlete *suivant;
-}Athlete, ListeAthlete;
+}Athlete;
 
-typedef ListeAthlete HashListeAthlete[TABLE_SIZE];
+typedef struct Element_TOP_50 Element_TOP_50;
+struct Element_TOP_50 {
+    Athlete ath;
+    Element_TOP_50 *suivant;
+};
+typedef struct {
+    Element_TOP_50 *premier;
+} Liste_TOP_50;
+
+typedef Athlete HashListeAthlete[TABLE_SIZE];
 #endif
