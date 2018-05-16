@@ -15,7 +15,7 @@ int asciis(char *word);
 
 void ajoutAthleteTeteTrieeScore(Liste_TOP_50 *liste, Athlete athlete, Element_TOP_50 *element);
 
-void ajoutTeteListHash(ListHash *liste, Athlete *ath);
+void ajoutTeteListHash(ListeHash *liste, Athlete *ath);
 
 void ajoutAthleteHashID(ListeHashAthlete *liste, int listeSize, Athlete *ath);
 
