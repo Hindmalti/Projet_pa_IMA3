@@ -46,50 +46,13 @@ typedef struct {
     Element_TOP_50 *premier;
 } Liste_TOP_50;
 
-
-/*
-// structure liste chaînée triée 
-typedef struct Element{
-	Athlete *pAth; 
-	Element *suivant; 
-	
-} Element;
+typedef struct ElementHash ElementHash;
+struct ElementHash {
+    Athlete *ath;
+    ElementHash *suivant;
+};
 typedef struct {
-	Element *premier;
-} Liste;
-// on remplit notre 
-void ajoutRecursif(Liste *liste, Athlete *pAthlete, Element *element){
-    if(liste->premier == NULL){
-        Element *ajout = malloc(sizeof *ajout);
-        ajout->pAth = pAthlete;
-        ajout->suivant = NULL;
-        liste->premier = ajout;
-        return;
-    }
-    if(pAthele < liste->premier->pAth){
-        Element *ajout = malloc(sizeof *ajout);
-        ajout->pAth = pAthlete;
-        ajout->suivant = liste->premier;
-        liste->premier = ajout;
-        return;
-    }
-    if(element->suivant == NULL || val < element->suivant->valeur){
-        Element *ajout = malloc(sizeof *ajout);
-        ajout->pAth = pAthlete;
-        ajout->suivant = element->suivant;
-        element->suivant = ajout;
-        return;
-    }
-    addRecursif(liste, pAthele, element->suivant);
-    return;
-}
+    ElementHash *premier;
+} ListeHash;
 
-void printListe(Liste liste){
-    Element *element = liste.premier;
-    while(element != NULL){
-        printf("%d\n", element->pAth->athId);
-        element = element->suivant;
-    }
-}
-*/
-
+typedef ListeHash ListeHashAthlete[];

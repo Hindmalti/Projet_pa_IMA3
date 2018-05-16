@@ -49,5 +49,14 @@ typedef struct {
     Element_TOP_50 *premier;
 } Liste_TOP_50;
 
-typedef Athlete HashListeAthlete[TABLE_SIZE];
+typedef struct ElementHash ElementHash;
+struct ElementHash {
+    Athlete *ath;
+    ElementHash *suivant;
+};
+typedef struct {
+    ElementHash *premier;
+} ListeHash;
+
+typedef ListeHash ListeHashAthlete[TABLE_SIZE];
 #endif

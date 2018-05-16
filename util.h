@@ -15,6 +15,12 @@ int asciis(char *word);
 
 void ajoutAthleteTeteTrieeScore(Liste_TOP_50 *liste, Athlete athlete, Element_TOP_50 *element);
 
+void ajoutTeteListHash(ListHash *liste, Athlete *ath);
+
+void ajoutAthleteHashID(ListeHashAthlete *liste, int listeSize, Athlete *ath);
+
+void ajoutAthleteHashNom(ListeHashAthlete *liste, int listeSize, Athlete *ath);
+
 void printListeAthlete(Liste_TOP_50 liste);
 
 void tiret(int n);
