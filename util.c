@@ -5,7 +5,7 @@
 
 void printAthlete(Athlete *ptr){
     if(ptr != NULL){
-        printf("%d %s %s %c %s m %s kg %deme\n"/*%d %d %d %d %d %d"*/, ptr->athId, ptr->lastName, ptr->firstName, ptr->gender, ptr->height, ptr->weight, ptr->overallRank/*, ptr->score18_1, ptr->score18_2, ptr->score18_2a, ptr->score18_3, ptr->score18_4, ptr->score18_5*/); 
+        printf("%d %s %s %c %s m %s kg %deme %d %d %d %d %d %d\n", ptr->athId, ptr->lastName, ptr->firstName, ptr->gender, ptr->height, ptr->weight, ptr->overallRank, ptr->score18_1, ptr->score18_2, ptr->score18_2a, ptr->score18_3, ptr->score18_4, ptr->score18_5); 
     }
 }
 
@@ -26,40 +26,11 @@ int hash_word(char *word, int tableSize){
     return (asciis(word) % tableSize);
 }
 
-/*Athlete* rechercheAthleteID(ListeAthlete liste, int athId){
-    while(liste != NULL){
-        if(liste->athId == athId){
-            return liste;
-        }
-        liste = liste->suivant;
-    }
-    return NULL;
-} 
-
-void rechercheAthleteNom(ListeAthlete liste, char *nom){
-    while(liste != NULL){
-        if(!strcmp(liste->lastName, nom)){
-            printAthlete(liste);
-        }
-        liste = liste->suivant;
-    }
-}
-
-void afficherAthlete(HashListeAthlete ht, int athId){
-    int indice = hash_int(athId);
-    printAthlete(rechercheAthleteID(ht[indice], athId));
-}
-
-void afficherNom(HashListeAthlete ht, char *nom){
-    int indice = hash_word(nom);
-    rechercheAthleteNom(ht[indice], nom);
-}*/
-
-void ajoutAthleteTeteTrieeScore(Liste_TOP_50 *liste, Athlete athlete, Element_TOP_50 *element){
+void ajoutAthleteTeteTrieeScore(ListeTop50 *liste, Athlete athlete, ElementTop50 *element){
     // cas particulier du debut de liste
     if(liste->premier == NULL || athlete.overallRank < liste->premier->ath.overallRank){
         // cree l'element
-        Element_TOP_50 *ajout = malloc(sizeof *ajout);
+        ElementTop50 *ajout = malloc(sizeof *ajout);
         ajout->ath = athlete;
         
         // pointe vers les elements suivants
@@ -73,7 +44,7 @@ void ajoutAthleteTeteTrieeScore(Liste_TOP_50 *liste, Athlete athlete, Element_TO
     // ajoute l'element si on est arrive a la fin de la liste ou si le suivant a un plus gros rank
     if(element->suivant == NULL || athlete.overallRank < element->suivant->ath.overallRank){
         // cree l'element
-        Element_TOP_50 *ajout = malloc(sizeof *ajout);
+        ElementTop50 *ajout = malloc(sizeof *ajout);
         ajout->ath = athlete;
         
         // pointe vers les elements suivants
@@ -89,7 +60,7 @@ void ajoutAthleteTeteTrieeScore(Liste_TOP_50 *liste, Athlete athlete, Element_TO
     return;
 }
 
-void ajoutTeteListHash(ListeHash *liste, Athlete *ath){
+void ajoutTeteListeHash(ListeHash *liste, Athlete *ath){
 	// creation de l'element
 	ElementHash *ajout = malloc(sizeof *ajout);
 	ajout->ath = ath;
@@ -99,32 +70,78 @@ void ajoutTeteListHash(ListeHash *liste, Athlete *ath){
 	liste->premier = ajout;
 }
 
-void ajoutAthleteHashID(ListeHashAthlete *liste, int listeSize, Athlete *ath){
+void ajoutAthleteHashID(ListeHash liste[], int listeSize, Athlete *ath){
 	// generation du hash
 	int hash = hash_int(ath->athId, listeSize);
 	// ajout dans la liste chainee a l'index du hash dans la table de hachage
-	ajoutTeteListHash(liste[hash], ath);
+	ajoutTeteListeHash(&liste[hash], ath);
 }
 
-void ajoutAthleteHashNom(ListeHashAthlete *liste, int listeSize, Athlete *ath){
+void ajoutAthleteHashNom(ListeHash liste[], int listeSize, Athlete *ath){
 	// generation du hash
-	char *str = "";
+	char str[50];
 	strcpy(str, ath->lastName); // copie de lastName dans str
 	strcat(str, ath->firstName); // concatenation de str et de firstName (resultat dans str)
 	int hash = hash_word(str, listeSize);
 	// ajout dans la liste chainee a l'index du hash dans la table de hachage
-	ajoutTeteListHash(liste[hash], ath);
+	ajoutTeteListeHash(&liste[hash], ath);
 }
 
-void printListeAthlete(Liste_TOP_50 liste){
-    Element_TOP_50 *element = liste.premier;
+Athlete* rechercheAthleteID(ListeHash liste[], int listeSize, unsigned int athID){
+	// generation du hash
+	int hash = hash_int(athID, listeSize);
+    // recherche dans la liste des hashs similaires
+    ElementHash *element = liste[hash].premier;
+    while(element != NULL){
+        if(element->ath->athId == athID)
+            return element->ath;
+        element = element->suivant;
+    }
+    return NULL;
+}
+
+Athlete* rechercheAthleteNom(ListeHash liste[], int listeSize, char *lastName, char *firstName){
+	// generation du hash
+	char str[50];
+	strcpy(str, lastName); // copie de lastName dans str
+	strcat(str, firstName); // concatenation de str et de firstName (resultat dans str)
+	int hash = hash_word(str, listeSize);
+    // recherche dans la liste des hashs similaires
+    ElementHash *element = liste[hash].premier;
+    while(element != NULL){
+        if(strcmp(element->ath->lastName, lastName) == 0
+            && strcmp(element->ath->firstName, firstName) == 0)
+            return element->ath;
+        element = element->suivant;
+    }
+    return NULL;
+}
+
+void printListeAthlete(ListeTop50 liste){
+    ElementTop50 *element = liste.premier;
     while(element != NULL){
         printAthlete(&(element->ath));
         element = element->suivant;
     }
 }
 
+void printListeHashTableau(ListeHash liste[], int listeSize){
+    // pour chaque hash
+    for(int i = 0; i < listeSize; i++){
+        // affiche tous les Athletes dans la liste des hashs similaires
+        printf("{ hash : %d\n", i);
+        ElementHash *element = liste[i].premier;
+        while(element != NULL){
+            printf("    ");
+            printAthlete(element->ath);
+            element = element->suivant;
+        }
+        printf("}\n");
+    }
+}
+
 void tiret(int n){
+    // affiche n tirets
     int i = 0;
     for(i = 0 ; i<n ; i++){
         printf("-");
@@ -132,13 +149,13 @@ void tiret(int n){
     printf("\n");
 }
 
-void ajoutAthlete(Liste_TOP_50 *liste50, ListeHashAthlete *listeHashID, int listeHashIDSize, ListeHashAthlete *listeHashNom, int listeHashNomSize, Athlete ath){
+void ajoutAthlete(ListeTop50 *liste50, ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize, Athlete *ath){
     // ajout dans la table des TOP50
-	ajoutAthleteTeteTrieeScore(liste50, ath, liste50->premier);
+	ajoutAthleteTeteTrieeScore(liste50, *ath, liste50->premier);
     
     // ajout dans la table de hachage des noms
-	ajoutAthleteHashID(listeHashNom, listeHashNomSize, &ath);
+	ajoutAthleteHashNom(listeHashNom, listeHashNomSize, ath);
 	
     // ajout dans la table de hachage des IDs
-	ajoutAthleteHashID(listeHashID, listeHashIDSize, &ath);
+	ajoutAthleteHashID(listeHashID, listeHashIDSize, ath);
 }

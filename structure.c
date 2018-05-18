@@ -37,14 +37,14 @@ typedef struct{
 	unsigned int rank18_5;
 }Athlete;
 
-typedef struct Element_TOP_50 Element_TOP_50;
-struct Element_TOP_50 {
+typedef struct ElementTop50 ElementTop50;
+struct ElementTop50 {
     Athlete ath;
-    Element_TOP_50 *suivant;
+    ElementTop50 *suivant;
 };
 typedef struct {
-    Element_TOP_50 *premier;
-} Liste_TOP_50;
+    ElementTop50 *premier;
+} ListeTop50;
 
 typedef struct ElementHash ElementHash;
 struct ElementHash {
@@ -54,5 +54,3 @@ struct ElementHash {
 typedef struct {
     ElementHash *premier;
 } ListeHash;
-
-typedef ListeHash ListeHashAthlete[];
