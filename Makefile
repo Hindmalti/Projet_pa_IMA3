@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -pedantic -g #Variable flags compilation
 LDFLAGS = #Variable flags linkage (-lm par exemple pour la libmath )
 SRC = $(wildcard *.c) #Variable contenant automatiquement la liste des .c SRC = table.c struct.c
 OBJ = $(SRC:.c=.o) #Variable contenant la liste des .o en fonction des .c OBJ = table.o struct.o
-EXEC = executable.out
+EXEC = executable
 
 all: $(EXEC)
 
