@@ -7,12 +7,18 @@
 
 void printAthlete(Athlete *ptr);
 
+int asciis(char *word);
+
 int hash_int(int athID);
 
 int hash_word(char *word);
 
-int asciis(char *word);
+void initialisation(ListeTop50 *liste50, ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize);
 
+void detruitTeteHash(ListeHash *liste);
+
+void detruitTeteTop50(ListeTop50 *liste);
+	
 void ajoutAthleteTeteTrieeScore(ListeTop50 *liste, Athlete athlete, ElementTop50 *element);
 
 void ajoutTeteListeHash(ListeHash *liste, Athlete *ath);
@@ -28,6 +34,8 @@ Athlete* rechercheAthleteNom(ListeHash liste[], int listeSize, char *lastName, c
 void printListeAthlete(ListeTop50 liste);
 
 void printListeHashTableau(ListeHash liste[], int listeSize);
+
+void detruireTout(ListeTop50 *liste50, ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize);
 
 void tiret(int n);
 

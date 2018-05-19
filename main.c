@@ -19,21 +19,17 @@ int main(void){
         54054, 2, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
     
 	// definition des listes
+	printf("Creation des listes...\n");
 	
-    int tempListeSize = 2;
+    int tempListeSize = 6;
     
     ListeTop50 listeTop50;
-    listeTop50.premier = NULL;
-	
     ListeHash listeHashID[tempListeSize];
-	for(int i = 0; i < tempListeSize; i++)
-		listeHashID[i].premier = NULL;
-	
     ListeHash listeHashNom[tempListeSize];
-	for(int i = 0; i < tempListeSize; i++)
-		listeHashNom[i].premier = NULL;
+	initialisation(&listeTop50, listeHashID, tempListeSize, listeHashNom, tempListeSize);
 	
 	// ajout d'athletes de test
+	printf("Remplissage des listes...\n");
     
     ajoutAthlete(&listeTop50, listeHashID, tempListeSize, listeHashNom, tempListeSize, &ath1);
     ajoutAthlete(&listeTop50, listeHashID, tempListeSize, listeHashNom, tempListeSize, &ath2);
@@ -42,16 +38,44 @@ int main(void){
     ajoutAthlete(&listeTop50, listeHashID, tempListeSize, listeHashNom, tempListeSize, &ath5);
 	
 	// verification des listes
+	printf("Affichage des listes...\n");
     
+	printf("   TOP50 :\n");
     printListeAthlete(listeTop50);
     tiret(30);
+	printf("   HASH ID :\n");
     printListeHashTableau(listeHashID, tempListeSize);
     tiret(30);
+	printf("   HASH NOM :\n");
     printListeHashTableau(listeHashNom, tempListeSize);
     tiret(30);
     
+	// Test de requetes sur les listes de hachage
+	printf("Test sur les listes de hachage...\n");
+	
+	printf("Recherche de l'id 17 :\n");
     printAthlete(rechercheAthleteID(listeHashID, tempListeSize, 17));
+	printf("Recherche de du nom \"azdfgdfggd\" + \"dgdfgdf\"\n");
     printAthlete(rechercheAthleteNom(listeHashNom, tempListeSize, "azdfgdfggd", "dgdfgdf"));
+    tiret(30);
+	
+	// destruction de toutes les listes
+	printf("Destruction des listes...\n");
+	
+	detruireTout(&listeTop50, listeHashID, tempListeSize, listeHashNom, tempListeSize);
+	
+	// verification
+	printf("Verification de la destruction...\n");
+    
+	printf("   TOP50 :\n");
+    printListeAthlete(listeTop50);
+    tiret(30);
+	printf("   HASH ID :\n");
+    printListeHashTableau(listeHashID, tempListeSize);
+    tiret(30);
+	printf("   HASH NOM :\n");
+    printListeHashTableau(listeHashNom, tempListeSize);
+    tiret(30);
     
     return 0;
 }

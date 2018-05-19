@@ -26,6 +26,32 @@ int hash_word(char *word, int tableSize){
     return (asciis(word) % tableSize);
 }
 
+
+void initialisation(ListeTop50 *liste50, ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize){
+	// s'assure que les listes sont bien initialisees et que le pointeur du premier element est bien NULL
+	liste50->premier = NULL;
+	for(int i = 0; i < listeHashIDSize; i++)
+		listeHashID[i].premier = NULL;
+	for(int i = 0; i < listeHashNomSize; i++)
+		listeHashNom[i].premier = NULL;
+}
+
+void detruitTeteHash(ListeHash *liste){
+	ElementHash *element = liste->premier;
+	if(element != NULL){
+		liste->premier = element->suivant;
+		free(element);
+	}
+}
+
+void detruitTeteTop50(ListeTop50 *liste){
+	ElementTop50 *element = liste->premier;
+	if(element != NULL){
+		liste->premier = element->suivant;
+		free(element);
+	}
+}
+
 void ajoutAthleteTeteTrieeScore(ListeTop50 *liste, Athlete athlete, ElementTop50 *element){
     // cas particulier du debut de liste
     if(liste->premier == NULL || athlete.overallRank < liste->premier->ath.overallRank){
@@ -138,6 +164,31 @@ void printListeHashTableau(ListeHash liste[], int listeSize){
         }
         printf("}\n");
     }
+}
+
+void detruireTout(ListeTop50 *liste50, ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize){
+	// destruction de ListeHashID
+	for(int i = 0; i < listeHashIDSize; i++){
+		ElementHash *element = listeHashID[i].premier;
+		while(element != NULL){
+			detruitTeteHash(&listeHashID[i]);
+			element = listeHashID[i].premier;
+		}
+	}
+	// destruction de ListeHashNom
+	for(int i = 0; i < listeHashNomSize; i++){
+		ElementHash *element = listeHashNom[i].premier;
+		while(element != NULL){
+			detruitTeteHash(&listeHashNom[i]);
+			element = listeHashNom[i].premier;
+		}
+	}
+	// destruction de ListeTop50
+	ElementTop50 *element = liste50->premier;
+	while(element != NULL){
+		detruitTeteTop50(liste50);
+		element = liste50->premier;
+	}
 }
 
 void tiret(int n){
