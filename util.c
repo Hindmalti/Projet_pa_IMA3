@@ -5,7 +5,7 @@
 
 void printAthlete(Athlete *ptr){
     if(ptr != NULL){
-        printf("%d %s %s %c %s m %s kg %deme %d %d %d %d %d %d\n", ptr->athId, ptr->lastName, ptr->firstName, ptr->gender, ptr->height, ptr->weight, ptr->overallRank, ptr->score18_1, ptr->score18_2, ptr->score18_2a, ptr->score18_3, ptr->score18_4, ptr->score18_5); 
+        printf("%d %s %s %c %d m %d kg %deme %d %d %d %d %d %d\n", ptr->athId, ptr->lastName, ptr->firstName, ptr->gender, ptr->height, ptr->weight, ptr->overallRank, ptr->score18_1, ptr->score18_2, ptr->score18_2a, ptr->score18_3, ptr->score18_4, ptr->score18_5); 
     }
 }
 

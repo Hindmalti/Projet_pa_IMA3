@@ -11,8 +11,8 @@ typedef struct{
 	char *firstName;
 	char gender; 
 	unsigned int age; 
-	char *weight; 
-	char *height; 
+	unsigned int weight; 
+	unsigned int height; 
 	unsigned int affiliateId; 
 	char *affiliateName; 
 	unsigned int overallScore; 
