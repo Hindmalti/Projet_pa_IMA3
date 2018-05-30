@@ -172,21 +172,21 @@ N'hésitez pas à vous référer au polycopié de programmation avancée pour le
 
 ### Fichiers `CSV`
 
-Comme les fichiers peuvent être volumineux, ils ne sont pas sur le dépôt GIT pour éviter de longs transferts / ou de saturer votre compte. De plus, pour éviter de travailler directement avec le fichier complet (399500 athlètes, 80 Mo) nous vous avons préparé des fichiers partiels:
+Comme les fichiers peuvent être volumineux, ils ne sont pas sur le dépôt GIT pour éviter de longs transferts / ou de saturer votre compte. De plus, pour éviter de travailler directement avec le fichier complet (325000 athlètes, 67 Mo) nous vous avons préparé des fichiers partiels:
 
 ~~~
-final_ranking_000010.csv    2.4K    // résultats de 10 athlètes
-final_ranking_000100.csv    20K     // résultats de 100 athlètes
-final_ranking_001000.csv    200K    // résultats de 1000 athlètes
-final_ranking_010000.csv    1.9M    // résultats de 10000 athlètes
-final_ranking_100000.csv    19M     // résultats de 100000 athlètes
-final_ranking_399500.csv    78M     // résultats complets 
+12K	final_ranking_000010.csv         // résultats de 10 athlètes
+32K	final_ranking_000100.csv         // résultats de 100 athlètes
+216K	final_ranking_001000.csv     // résultats de 1000 athlètes
+2,1M	final_ranking_010000.csv     // résultats de 10000 athlètes
+21M	final_ranking_100000.csv         // résultats de 100000 athlètes
+67M	final_ranking.csv                // résultats complets
 ~~~
 
-Ils se situent tous à l'adresse `http://www.dequidt.me/documents/IMA3.PA/projet_2018/` ainsi pour récupérer le plus petit fichier vous pouvez utiliser la commande `curl` via 
+Ils se situent tous à l'adresse `http://www.cristal.univ-lille.fr/~forget/IMA3.PA/` ainsi pour récupérer le plus petit fichier vous pouvez utiliser la commande `curl` via 
 
 ~~~
-curl http://www.dequidt.me/documents/IMA3.PA/projet_2018/final_ranking_000010.csv 
+curl http://www.cristal.univ-lille.fr/~forget/IMA3.PA/final_ranking_000010.csv
 ~~~
 
 ### Description des champs du tableau `CSV`
@@ -214,7 +214,7 @@ Elle se trouve dans le répertoire `data` du dépôt `GIT.
 
 ### Détail des épreuves
 
-> A priori vous n'en avez pas besoin pour le sujet mais on ne sait jamais 😎
+> A priori vous n'en avez pas besoin pour le sujet mais on ne sait jamais
 
 - [Workout 18.1](https://games.crossfit.com/workouts/open/2018/1)
 
