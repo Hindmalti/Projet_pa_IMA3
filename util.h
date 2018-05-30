@@ -5,40 +5,28 @@
 #include <string.h>
 #include "structure.h"
 
-void printAthlete(Athlete *ptr);
+void printAthleteDebug(Athlete *ptr);
 
-int asciis(char *word);
+void printAthleteTop50(Athlete *ptr);
 
-int hash_int(int athID);
+void printAthleteTop50Ep(Athlete *ptr, int epreuveId);
 
-int hash_word(char *word);
+void printAthleteDefaut(Athlete *ptr);
 
-void initialisation(ListeTop50 *liste50, ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize);
+void printTop50(ListeTop50 liste);
 
-void detruitTeteHash(ListeHash *liste);
+void printTop50Genre(ListeTop50 liste, char genre);
 
-void detruitTeteTop50(ListeTop50 *liste);
-	
-void ajoutAthleteTeteTrieeScore(ListeTop50 *liste, Athlete athlete, ElementTop50 *element);
+void printTop50Region(ListeTop50 liste, int regionId);
 
-void ajoutTeteListeHash(ListeHash *liste, Athlete *ath);
+void printTop50Epreuve(ListeTop50Ep liste, int epreuveId);
 
-void ajoutAthleteHashID(ListeHash liste[], int listeSize, Athlete *ath);
+void printTopSalle(ListeTop50 liste, unsigned int salleId);
 
-void ajoutAthleteHashNom(ListeHash liste[], int listeSize, Athlete *ath);
-
-Athlete* rechercheAthleteID(ListeHash liste[], int listeSize, int athID);
-
-Athlete* rechercheAthleteNom(ListeHash liste[], int listeSize, char *lastName, char *firstName);
-
-void printListeAthlete(ListeTop50 liste);
+void printTopSalleLille(ListeTop50 liste);
 
 void printListeHashTableau(ListeHash liste[], int listeSize);
 
-void detruireTout(ListeTop50 *liste50, ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize);
-
 void tiret(int n);
-
-void ajoutAthlete(ListeTop50 *liste50, ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize, Athlete *ath);
 
 #endif

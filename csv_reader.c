@@ -92,7 +92,7 @@ void read_csv_header(char * header_line)
     if (IS_DEBUG) display_header();
 }
 
-void read_csv_file(const char * filename, ListeTop50 *liste50, ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize)
+void read_csv_file(const char * filename, ListeTop50 *liste50, ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize, ListeTop50Ep listeTop50Ep[5])
 {
 	
     FILE*   fp = fopen(filename, "r");
@@ -137,10 +137,10 @@ void read_csv_file(const char * filename, ListeTop50 *liste50, ListeHash listeHa
 			if(index != 3 || index != 4 || index != 5 || index != 10)
 				inttemp = atoi(temp);
 			
-			
 			switch(index){
 				case 0:
 					ath->athId = inttemp;
+					//printf("%d\n", inttemp);
 					break;
 				case 1:
 					ath->regId = inttemp;
@@ -161,72 +161,55 @@ void read_csv_file(const char * filename, ListeTop50 *liste50, ListeHash listeHa
 					ath->age = inttemp;
 					break;
 				case 7:
-					ath->weight = inttemp;
+					ath->weight = ((float) inttemp) * 0.4536f;
 					break;
 				case 8:
-					ath->height = inttemp;
+					ath->height = ((float) inttemp) * 0.0254f;
 					break;
 				case 9:
 					ath->affiliateId = inttemp;
 					break;
-				case 10:
-					ath->affiliateName = malloc(strlen(temp) + 1);
-					strcpy(ath->affiliateName, temp);
-					break;
+				//case 10 n'est pas necessaire
 				case 11:
 					ath->overallScore = inttemp;
 					break;
-				case 12:
-					ath->overallRank = inttemp;
-					break;
+				//case 12 n'est pas necessaire
 				case 13:
 					ath->score18_1 = inttemp;
 					break;
 				//case 14 n'est pas necessaire
-				case 15:
-					ath->rank18_1 = inttemp;
-					break;
+				//case 15 n'est pas necessaire
 				case 16:
 					ath->score18_2 = inttemp;
 					break;
 				//case 17 n'est pas necessaire
-				case 18:
-					ath->rank18_2 = inttemp;
-					break;
+				//case 18 n'est pas necessaire
 				case 19:
 					ath->score18_2a = inttemp;
 					break;
 				//case 20 n'est pas necessaire
-				case 21:
-					ath->rank18_2a = inttemp;
-					break;
+				//case 21 n'est pas necessaire
 				case 22:
 					ath->score18_3 = inttemp;
 					break;
 				//case 23 n'est pas necessaire
-				case 24:
-					ath->rank18_3 = inttemp;
-					break;
+				//case 24 n'est pas necessaire
 				case 25:
 					ath->score18_4 = inttemp;
 					break;
 				//case 26 n'est pas necessaire
-				case 27:
-					ath->rank18_4 = inttemp;
-					break;
+				//case 27 n'est pas necessaire
 				case 28:
 					ath->score18_5 = inttemp;
 					break;
 				//case 29 n'est pas necessaire
-				case 30:
-					ath->rank18_5 = inttemp;
-					break;
+				//case 30 n'est pas necessaire
 			}
 			
 			index++;
             token = strtok_new(NULL, CSV_DELIMITERS);
         }
-		ajoutAthlete(liste50, listeHashID, listeHashIDSize, listeHashNom, listeHashNomSize, ath);
+		ajoutAthlete(liste50, listeHashID, listeHashIDSize, listeHashNom, listeHashNomSize, listeTop50Ep, ath);
     }
 
     fclose(fp);
