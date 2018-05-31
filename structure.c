@@ -20,18 +20,19 @@ int hash_word(char *word, int tableSize){
     return (asciis(word) % tableSize);
 }
 
-void initialisation(ListeTop50 liste50[], int listeTop50Size, ListeHash listeHashID[],
-		int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize,
-		ListeTop50Ep listeTop50Ep[5]){
+void initialisation(ListeTop50 liste50[], ListeTop50Ep listeTop50Ep[][5],
+		int listeTop50Size, ListeHash listeHashID[], int listeHashIDSize,
+		ListeHash listeHashNom[], int listeHashNomSize){
 	// s'assure que les listes sont bien initialisees et que le pointeur du premier element est bien NULL
 	for(int i = 0; i < listeTop50Size; i++)
 		liste50[i].premier = NULL;
+	for(int i = 0; i < 5; i++)
+		for(int j = 0; j < listeTop50Size; j++)
+			listeTop50Ep[j][i].premier = NULL;
 	for(int i = 0; i < listeHashIDSize; i++)
 		listeHashID[i].premier = NULL;
 	for(int i = 0; i < listeHashNomSize; i++)
 		listeHashNom[i].premier = NULL;
-	for(int i = 0; i < 5; i++)
-		listeTop50Ep[i].premier = NULL;
 }
 
 void detruitTeteHash(ListeHash *liste){
@@ -225,15 +226,15 @@ Athlete* rechercheAthleteNom(ListeHash liste[], int listeSize, char *lastName){
     return NULL;
 }
 
-void ajoutAthlete(ListeTop50 liste50[], int whichTop50, ListeHash listeHashID[],
-		int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize,
-		ListeTop50Ep listeTop50Ep[5], Athlete *ath){
+void ajoutAthlete(ListeTop50 liste50[], ListeTop50Ep listeTop50Ep[][5], int whichTop50,
+		ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[],
+		int listeHashNomSize, Athlete *ath){
 	// ajout dans la table des TOP50
 	ajoutAthleteTeteTrieeScore(&liste50[whichTop50], *ath);
 	
 	// ajout dans les tables des TOP50 des epreuves
-	/*for(int i = 0; i < 5; i++)
-		ajoutAthleteTeteTrieeScoreEp(&listeTop50Ep[i], ath, i);*/
+	for(int i = 0; i < 5; i++)
+		ajoutAthleteTeteTrieeScoreEp(&listeTop50Ep[whichTop50][i], ath, i);
 	
     // ajout dans la table de hachage des noms
 	ajoutAthleteHashNom(listeHashNom, listeHashNomSize, ath);

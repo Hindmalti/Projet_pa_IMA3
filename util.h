@@ -17,7 +17,7 @@ void printTop50Genre(ListeTop50 liste[], int listeSize, char genre);
 
 void printTop50Region(ListeTop50 liste[], int listeSize, int regionId);
 
-//void printTop50Epreuve(ListeTop50Ep liste[], int epreuveId);
+void printTop50Epreuve(ListeTop50Ep liste[][5], int listeSize, int epreuveId);
 
 void printTopSalle(ListeTop50 liste[], unsigned int salleId);
 

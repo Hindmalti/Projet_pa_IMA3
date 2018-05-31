@@ -92,9 +92,10 @@ void read_csv_header(char * header_line)
     if (IS_DEBUG) display_header();
 }
 
-void read_csv_file(const char * filename, int maxLine, ListeTop50 liste50[], int listeTop50Size,
+void read_csv_file(const char * filename, int maxLine, ListeTop50 liste50[],
+		ListeTop50Ep listeTop50Ep[][5], int listeTop50Size,
 		ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[],
-		int listeHashNomSize, ListeTop50Ep listeTop50Ep[5])
+		int listeHashNomSize)
 {
 	
     FILE*   fp = fopen(filename, "r");
@@ -217,8 +218,8 @@ void read_csv_file(const char * filename, int maxLine, ListeTop50 liste50[], int
             token = strtok_new(NULL, CSV_DELIMITERS);
         }
 		int whichListeTop50 = (currentLigne * (listeTop50Size - 1)) / maxLine;
-		ajoutAthlete(liste50, whichListeTop50, listeHashID, listeHashIDSize, listeHashNom,
-				listeHashNomSize, listeTop50Ep, ath);
+		ajoutAthlete(liste50, listeTop50Ep, whichListeTop50, listeHashID, listeHashIDSize, listeHashNom,
+				listeHashNomSize, ath);
 	}
 	
 	chargementTexte(100);

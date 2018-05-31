@@ -15,7 +15,8 @@ int combienAthlete(char *filename);
 void read_csv_header(char * header_line);
 
 void read_csv_file(const char * filename, int maxLine, ListeTop50 liste50[],
-		int listeTop50Size, ListeHash listeHashID[], int listeHashIDSize,
-		ListeHash listeHashNom[], int listeHashNomSize, ListeTop50Ep listeTop50Ep[5]);
+		ListeTop50Ep listeTop50Ep[][5], int listeTop50Size,
+		ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[],
+		int listeHashNomSize);
 
 #endif

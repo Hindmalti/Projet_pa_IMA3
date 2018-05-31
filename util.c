@@ -29,7 +29,7 @@ void printAthleteTop50Ep(Athlete *ptr, int epreuveId){
 				score = ptr->score18_5;
 				break;
 		}
-        printf("%15.15s %15.15s %10d\n", ptr->lastName, ptr->firstName, score); 
+        printf("%15.15s %15.15s %16d\n", ptr->lastName, ptr->firstName, score); 
     }
 }
 
@@ -62,6 +62,12 @@ void printTop50(ListeTop50 liste[], int listeSize){
 		// trouve le plus grand score entre les elements
 		int save = 0;
 		for(int i = 1; i < listeSize; i++){
+			// au debut (save = 0), elements[save] peut être NULL
+			// on repousse le probleme jusqu'a elements[save] != NULL
+			if(elements[save] == NULL){
+				save = i;
+				continue;
+			}
 			if(elements[i] != NULL && elements[save]->ath.overallScore < elements[i]->ath.overallScore)
 				save = i;
 		}
@@ -108,6 +114,12 @@ void printTop50Genre(ListeTop50 liste[], int listeSize, char genre){
 		// trouve le plus grand score entre les elements
 		int save = 0;
 		for(int i = 1; i < listeSize; i++){
+			// au debut (save = 0), elements[save] peut être NULL
+			// on repousse le probleme jusqu'a elements[save] != NULL
+			if(elements[save] == NULL){
+				save = i;
+				continue;
+			}
 			if(elements[i] != NULL && elements[save]->ath.overallScore < elements[i]->ath.overallScore)
 				save = i;
 		}
@@ -172,18 +184,74 @@ void printTop50Region(ListeTop50 liste[], int listeSize, unsigned int regionId){
     }while(allElementsNULL != 1 && count < 50);
 }
 
-/*void printTop50Epreuve(ListeTop50Ep liste[], int epreuveId){
-    ElementTop50Ep *element = liste.premier;
-	int i = 0;
-    while(element != NULL && i < 50){
-		printf("%2.2d ", i+1);
-		printAthleteTop50Ep(element->ath, epreuveId);
-        element = element->suivant;
-		i++;
-    }
+void printTop50Epreuve(ListeTop50Ep liste[][5], int listeSize, int epreuveId){
+	ElementTop50Ep *elements[listeSize];
+	for(int i = 0; i < listeSize; i++){
+		elements[i] = liste[i][epreuveId - 1].premier;
+	}
+	
+	int count = 0;
+	int allElementsNULL;
+    do{
+		// check si tous les elements sont null
+		allElementsNULL = 1;
+		for(int i = 0; i < listeSize; i++){
+			if(elements[i] != NULL){
+				allElementsNULL = 0;
+				break;
+			}
+		}
+		if(allElementsNULL == 1)
+			break;
+		
+		// trouve le plus grand score entre les elements
+		int save = 0;
+		for(int i = 1; i < listeSize; i++){
+			// au debut (save = 0), elements[save] peut être NULL
+			// on repousse le probleme jusqu'a elements[save] != NULL
+			if(elements[save] == NULL){
+				save = i;
+				continue;
+			}
+			if(elements[i] != NULL){
+				int saveSc = 0;
+				int iSc = 0;
+				switch(epreuveId){
+					case 0:
+						saveSc = elements[save]->ath->score18_1;
+						iSc = elements[i]->ath->score18_1;
+						break;
+					case 1:
+						saveSc = elements[save]->ath->score18_2;
+						iSc = elements[i]->ath->score18_2;
+						break;
+					case 2:
+						saveSc = elements[save]->ath->score18_3;
+						iSc = elements[i]->ath->score18_3;
+						break;
+					case 3:
+						saveSc = elements[save]->ath->score18_4;
+						iSc = elements[i]->ath->score18_4;
+						break;
+					case 4:
+						saveSc = elements[save]->ath->score18_5;
+						iSc = elements[i]->ath->score18_5;
+						break;
+				}
+				if(saveSc < iSc){
+					save = i;
+				}
+			}
+		}
+		
+		printf("%2.2d ", count+1);
+		printAthleteTop50Ep(elements[save]->ath, epreuveId);
+        elements[save] = elements[save]->suivant;
+		count++;
+    }while(allElementsNULL != 1 && count < 50);
 }
 
-void printTopSalle(ListeTop50 liste[], unsigned int salleId){
+/*void printTopSalle(ListeTop50 liste[], unsigned int salleId){
     ElementTop50 *element = liste.premier;
 	int i = 0;
     while(element != NULL){
