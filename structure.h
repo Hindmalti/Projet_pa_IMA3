@@ -71,15 +71,17 @@ int hash_int(int athID, int tableSize);
 
 int hash_word(char *word, int tableSize);
 
-void initialisation(ListeTop50 *liste50, ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize, ListeTop50Ep listeTop50Ep[5]);
+void initialisation(ListeTop50 liste50[], int listeTop50Size, ListeHash listeHashID[],
+		int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize,
+		ListeTop50Ep listeTop50Ep[5]);
 
 void detruitTeteHash(ListeHash *liste);
 
 void detruitTeteTop50(ListeTop50 *liste);
-	
-void ajoutAthleteTeteTrieeScore(ListeTop50 *liste, Athlete athlete, ElementTop50 *element);
 
-void ajoutAthleteTeteTrieeScoreEp(ListeTop50Ep *liste, Athlete *athlete, ElementTop50Ep *element, int epreuveId);
+void ajoutAthleteTeteTrieeScore(ListeTop50 *liste, Athlete athlete);
+
+void ajoutAthleteTeteTrieeScoreEp(ListeTop50Ep *liste, Athlete *athlete, int epreuveId);
 
 void ajoutTeteListeHash(ListeHash *liste, Athlete *ath);
 
@@ -91,8 +93,11 @@ Athlete* rechercheAthleteID(ListeHash liste[], int listeSize, unsigned int athID
 
 Athlete* rechercheAthleteNom(ListeHash liste[], int listeSize, char *lastName);
 
-void ajoutAthlete(ListeTop50 *liste50, ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize, ListeTop50Ep listeTop50Ep[5], Athlete *ath);
+void ajoutAthlete(ListeTop50 liste50[], int whichTop50, ListeHash listeHashID[],
+		int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize,
+		ListeTop50Ep listeTop50Ep[5], Athlete *ath);
 
-void detruireTout(ListeTop50 *liste50, ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize);
+void detruireTout(ListeTop50 liste50[], int listeTop50Size, ListeHash listeHashID[],
+		int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize);
 
 #endif

@@ -92,7 +92,9 @@ void read_csv_header(char * header_line)
     if (IS_DEBUG) display_header();
 }
 
-void read_csv_file(const char * filename, ListeTop50 *liste50, ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize, ListeTop50Ep listeTop50Ep[5])
+void read_csv_file(const char * filename, int maxLine, ListeTop50 liste50[], int listeTop50Size,
+		ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[],
+		int listeHashNomSize, ListeTop50Ep listeTop50Ep[5])
 {
 	
     FILE*   fp = fopen(filename, "r");
@@ -110,10 +112,16 @@ void read_csv_file(const char * filename, ListeTop50 *liste50, ListeHash listeHa
     fgets(buffer, BUFFER_SIZE, fp);
 	
     //read_csv_header(buffer);
-
     // Remaining rows are the entries
+	
+	int currentLigne = 0;
+	chargementTexte(-1);
     while ( NULL != fgets(buffer, BUFFER_SIZE, fp) )
     {
+		currentLigne++;
+		if(currentLigne % 100 == 0)
+			chargementTexte((currentLigne * 100) / maxLine);
+		
         if (IS_DEBUG) printf("Ligne is %s\n", buffer);
 		
         char*           token;
@@ -140,7 +148,6 @@ void read_csv_file(const char * filename, ListeTop50 *liste50, ListeHash listeHa
 			switch(index){
 				case 0:
 					ath->athId = inttemp;
-					//printf("%d\n", inttemp);
 					break;
 				case 1:
 					ath->regId = inttemp;
@@ -161,10 +168,10 @@ void read_csv_file(const char * filename, ListeTop50 *liste50, ListeHash listeHa
 					ath->age = inttemp;
 					break;
 				case 7:
-					ath->weight = ((float) inttemp) * 0.4536f;
+					ath->weight = ((float) inttemp) * 0.4536f; // conversion lb -> kg
 					break;
 				case 8:
-					ath->height = ((float) inttemp) * 0.0254f;
+					ath->height = ((float) inttemp) * 0.0254f; // conversion in -> m
 					break;
 				case 9:
 					ath->affiliateId = inttemp;
@@ -209,9 +216,12 @@ void read_csv_file(const char * filename, ListeTop50 *liste50, ListeHash listeHa
 			index++;
             token = strtok_new(NULL, CSV_DELIMITERS);
         }
-		ajoutAthlete(liste50, listeHashID, listeHashIDSize, listeHashNom, listeHashNomSize, listeTop50Ep, ath);
-    }
-
+		int whichListeTop50 = (currentLigne * (listeTop50Size - 1)) / maxLine;
+		ajoutAthlete(liste50, whichListeTop50, listeHashID, listeHashIDSize, listeHashNom,
+				listeHashNomSize, listeTop50Ep, ath);
+	}
+	
+	chargementTexte(100);
     fclose(fp);
 	
     for(unsigned int i = 0; i < CSV_NB_FIELDS; i++)
