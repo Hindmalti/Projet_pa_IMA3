@@ -132,14 +132,27 @@ int main(int argc, char * argv[]){
 			case 6:{
 				char temp4[46];
 				strncpy(temp4, buffer+2, 46);
-				if(buffer[1] != ' ' || buffer[0] != '\0'){
+				if(buffer[1] != ' ' || buffer[2] == '\n'){
 					printf("Usage de la commande 6 : 6 [nom famille athlete]\n");
 					break;
 				}
-				printf(" *** Recherche de l'athlete ayant pour nom de famille %s :\n\n", temp4);
+				// copie de temp4 a la bonne taille
+				int lenght = 0;
+				for(int i = 0; i < 46; i++){
+                    lenght++;
+                    if(temp4[i] == '\n')
+                        break;
+                }
+                char nom[lenght];
+                for(int i = 0; i < lenght-1; i++){
+                    nom[i] = temp4[i];
+                }
+                nom[lenght-1] = '\0';
+                
+				printf(" *** Recherche de l'athlete ayant pour nom de famille %s :\n\n", nom);
 				printf("%10.10s %15.15s %15.15s %4.4s %3.3s %8.8s %8.8s %11.11s %11.11s %11.11s %11.11s %11.11s %11.11s\n",
 						"ID", "NOM DE FAMILLE", "PRENOM", "SEXE", "AGE", "TAILLE m", "POIDS kg", "SCORE 18.1", "SCORE 18.2", "SCORE 18.2a", "SCORE 18.3", "SCORE 18.4", "SCORE 18.5"); 
-				printAthleteDefaut(rechercheAthleteNom(listeHashID, listeHashSize, temp4));
+				printAthleteDefaut(rechercheAthleteNom(listeHashID, listeHashSize, nom));
 				break;
 			}
 			/*case 7:{
