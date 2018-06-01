@@ -125,8 +125,8 @@ int main(int argc, char * argv[]){
 				}
 				printf(" *** Recherche de l'athlete ayant pour id %d :\n\n", id);
 				printf("%10.10s %15.15s %15.15s %4.4s %3.3s %8.8s %8.8s %11.11s %11.11s %11.11s %11.11s %11.11s %11.11s\n",
-						"ID", "NOM DE FAMILLE", "PRENOM", "SEXE", "AGE", "TAILLE m", "POIDS kg", "SCORE 18.1", "SCORE 18.2", "SCORE 18.2a", "SCORE 18.3", "SCORE 18.4", "SCORE 18.5"); 
-				printAthleteDefaut(rechercheAthleteID(listeHashID, listeHashSize, id));
+						"ID", "NOM DE FAMILLE", "PRENOM", "SEXE", "AGE", "TAILLE m", "POIDS kg", "SCORE 18.1", "SCORE 18.2", "SCORE 18.2a", "SCORE 18.3", "SCORE 18.4", "SCORE 18.5");
+				printHashId(listeHashID, listeHashSize, id);
 				break;
 			}
 			case 6:{
@@ -136,26 +136,15 @@ int main(int argc, char * argv[]){
 					printf("Usage de la commande 6 : 6 [nom famille athlete]\n");
 					break;
 				}
-				// copie de temp4 a la bonne taille
-				int lenght = 0;
 				for(int i = 0; i < 46; i++){
-                    lenght++;
-                    if(temp4[i] == '\n')
-                        break;
-                }
-                char nom[lenght];
-                for(int i = 0; i < lenght-1; i++){
-                    nom[i] = temp4[i];
-                }
-                nom[lenght-1] = '\0';
-                
-				printf(" *** Recherche de l'athlete ayant pour nom de famille %s :\n\n", nom);
-				printf("%10.10s %15.15s %15.15s %4.4s %3.3s %8.8s %8.8s %11.11s %11.11s %11.11s %11.11s %11.11s %11.11s\n",
-						"ID", "NOM DE FAMILLE", "PRENOM", "SEXE", "AGE", "TAILLE m", "POIDS kg", "SCORE 18.1", "SCORE 18.2", "SCORE 18.2a", "SCORE 18.3", "SCORE 18.4", "SCORE 18.5"); 
-				printAthleteDefaut(rechercheAthleteNom(listeHashID, listeHashSize, nom));
+					if(temp4[i] == '\n')
+						temp4[i] = '\0';
+				}
+				printf(" *** Recherche de l'athlete ayant pour nom de famille %s :\n\n", temp4);
+				printHashNom(listeHashNom, listeHashSize, temp4);
 				break;
 			}
-			/*case 7:{
+			case 7:{
 				char temp5[46];
 				strncpy(temp5, buffer+2, 46);
 				int id = atoi(temp5);
@@ -168,7 +157,7 @@ int main(int argc, char * argv[]){
 				printTopSalle(listeTop50, id);
 				break;
 			}
-			case 8:{
+			/*case 8:{
 				printf(" *** Affichage du classement des salles de Lille :\n\n");
 				printf("%3.3s %15.15s %15.15s %10.10s\n\n", "###", "NOM DE FAMILLE", "PRENOM", "SCORE");
 				printTopSalleLille(listeTop50);

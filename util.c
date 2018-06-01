@@ -33,12 +33,6 @@ void printAthleteTop50Ep(Athlete *ptr, int epreuveId){
     }
 }
 
-void printAthleteDefaut(Athlete *ptr){
-    if(ptr != NULL){
-        printf("%10d %15.15s %15.15s    %c %3d %6.4f m %5d kg %11d %11d %11d %11d %11d %11d\n", ptr->athId, ptr->lastName, ptr->firstName, ptr->gender, ptr->age, ptr->height, ptr->weight, ptr->score18_1, ptr->score18_2, ptr->score18_2a, ptr->score18_3, ptr->score18_4, ptr->score18_5); 
-    }
-}
-
 void printTop50(ListeTop50 liste[], int listeSize){
 	ElementTop50 *elements[listeSize];
 	for(int i = 0; i < listeSize; i++){
@@ -251,7 +245,38 @@ void printTop50Epreuve(ListeTop50Ep liste[][5], int listeSize, int epreuveId){
     }while(allElementsNULL != 1 && count < 50);
 }
 
-/*void printTopSalle(ListeTop50 liste[], unsigned int salleId){
+void printHashId(ListeHash liste[], int listeSize, unsigned int athID){
+	Athlete *ath = rechercheAthleteID(liste, listeSize, athID);
+	printf("%10.10s %15.15s %15.15s  %4.4s  %3.3s  %8.8s  %8.8s\n",
+			"ID", "NOM DE FAMILLE", "PRENOM", "SEXE", "AGE", "TAILLE m", "POIDS kg");
+	printf("%10d %15.15s %15.15s     %c %4d %7.2f m %6d kg\n",
+			ath->athId, ath->lastName, ath->firstName, ath->gender, ath->age,
+			ath->height, ath->weight);
+	printf("%11.11s %11.11s %12.12s %11.11s %11.11s %11.11s\n",
+			"SCORE 18.1", "SCORE 18.2", "SCORE 18.2a", "SCORE 18.3", "SCORE 18.4",
+			"SCORE 18.5");
+	printf("%11d %11d %12d %11d %11d %11d\n",
+			ath->score18_1, ath->score18_2, ath->score18_2a, ath->score18_3,
+			ath->score18_4, ath->score18_5);
+}
+
+
+void printHashNom(ListeHash liste[], int listeSize, char *lastName){
+	Athlete *ath = rechercheAthleteNom(liste, listeSize, lastName);
+	printf("%10.10s %15.15s %15.15s  %4.4s  %3.3s  %8.8s  %8.8s\n",
+			"ID", "NOM DE FAMILLE", "PRENOM", "SEXE", "AGE", "TAILLE m", "POIDS kg");
+	printf("%10d %15.15s %15.15s     %c %4d %7.2f m %6d kg\n\n",
+			ath->athId, ath->lastName, ath->firstName, ath->gender, ath->age,
+			ath->height, ath->weight);
+	printf("%11.11s %11.11s %12.12s %11.11s %11.11s %11.11s\n",
+			"SCORE 18.1", "SCORE 18.2", "SCORE 18.2a", "SCORE 18.3", "SCORE 18.4",
+			"SCORE 18.5");
+	printf("%11d %11d %12d %11d %11d %11d\n",
+			ath->score18_1, ath->score18_2, ath->score18_2a, ath->score18_3,
+			ath->score18_4, ath->score18_5);
+}
+
+void printTopSalle(ListeTop50 liste[], unsigned int salleId){
     ElementTop50 *element = liste.premier;
 	int i = 0;
     while(element != NULL){
@@ -264,7 +289,7 @@ void printTop50Epreuve(ListeTop50Ep liste[][5], int listeSize, int epreuveId){
     }
 }
 
-void printTopSalleLille(ListeTop50 liste[]){
+/*void printTopSalleLille(ListeTop50 liste[]){
     ElementTop50 *element = liste.premier;
 	int i = 0;
     while(element != NULL){
