@@ -57,41 +57,6 @@ int combienAthlete(char *filename){
 	return i;
 }
 
-void read_csv_header(char * header_line)
-{
-    int     nb_fields   = 0;
-    char*   string_ptr  = header_line;
-
-    // Count the occurrences of delimiters
-    while (NULL != string_ptr)
-    {
-        nb_fields++;
-        string_ptr = strpbrk(string_ptr, CSV_DELIMITERS);
-        if (NULL != string_ptr)
-        {
-            string_ptr++;
-        }
-    }
-
-    // Globals allocation
-    CSV_NB_FIELDS       = nb_fields;
-    CSV_HEADER_FIELDS   = malloc( nb_fields * sizeof(char*) );
-
-    char* token         = strtok_new(header_line, CSV_DELIMITERS);              // strtok_new init.
-
-	printf("aaa\n");
-    // Re-read the line to get the header of the columns
-    for (int i = 0; i < nb_fields; i++)
-    {
-        CSV_HEADER_FIELDS[i] = malloc( FIELD_SIZE * sizeof(char) );             // alloc
-        memset(CSV_HEADER_FIELDS[i], 0, FIELD_SIZE);                            // 0 init.
-        strcpy(CSV_HEADER_FIELDS[i], token);                                    // copy field in the structure
-        token = strtok_new(NULL, CSV_DELIMITERS);                               // loop to get a new field label
-    }
-
-    if (IS_DEBUG) display_header();
-}
-
 void read_csv_file(const char * filename, int maxLine, ListeTop50 liste50[],
 		ListeTop50Ep listeTop50Ep[][5], int listeTop50Size,
 		ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[],
@@ -112,108 +77,90 @@ void read_csv_file(const char * filename, int maxLine, ListeTop50 liste50[],
 	
     fgets(buffer, BUFFER_SIZE, fp);
 	
-    //read_csv_header(buffer);
     // Remaining rows are the entries
 	
 	int currentLigne = 0;
+	int afficheLigne = maxLine/5;
 	chargementTexte(-1);
     while ( NULL != fgets(buffer, BUFFER_SIZE, fp) )
     {
 		currentLigne++;
-		if(currentLigne % 100 == 0)
+		if(currentLigne % afficheLigne == 0)
 			chargementTexte((currentLigne * 100) / maxLine);
 		
-        if (IS_DEBUG) printf("Ligne is %s\n", buffer);
-		
-        char*           token;
-        unsigned int    i = 0;
-
-        // strtok init.
-        token = strtok_new(buffer, CSV_DELIMITERS);
+        char* token = strtok_new(buffer, CSV_DELIMITERS);
 		
 		int index = 0;
 		Athlete *ath = malloc(sizeof *ath);
         while (NULL != token)
         {
-			if (IS_DEBUG) printf("Field in %d is %s\n", i, token);
-			
-            // ...
-            // you can strcpy the `token` string in your data structures
-            // ...
-			
-			char* temp = token;
-			int inttemp = -1;
-			if(index != 3 || index != 4 || index != 5 || index != 10)
-				inttemp = atoi(temp);
-			
 			switch(index){
 				case 0:
-					ath->athId = inttemp;
+					ath->athId = atoi(token);
 					break;
 				case 1:
-					ath->regId = inttemp;
+					ath->regId = atoi(token);
 					break;
 				//case 2 n'est pas necessaire
 				case 3:
-					ath->lastName = malloc(strlen(temp) + 1);
-					strcpy(ath->lastName, temp);
+					ath->lastName = malloc(strlen(token) + 1);
+					strcpy(ath->lastName, token);
 					break;
 				case 4:
-					ath->firstName = malloc(strlen(temp) + 1);
-					strcpy(ath->firstName, temp);
+					ath->firstName = malloc(strlen(token) + 1);
+					strcpy(ath->firstName, token);
 					break;
 				case 5:
-					ath->gender = temp[0];
+					ath->gender = token[0];
 					break;
 				case 6:
-					ath->age = inttemp;
+					ath->age = atoi(token);
 					break;
 				case 7:
-					ath->weight = ((float) inttemp) * 0.4536f; // conversion lb -> kg
+					ath->weight = ((float) atoi(token)) * 0.4536f; // conversion lb -> kg
 					break;
 				case 8:
-					ath->height = ((float) inttemp) * 0.0254f; // conversion in -> m
+					ath->height = ((float) atoi(token)) * 0.0254f; // conversion in -> m
 					break;
 				case 9:
-					ath->affiliateId = inttemp;
+					ath->affiliateId = atoi(token);
 					break;
 				//case 10 n'est pas necessaire
 				case 11:
-					ath->overallScore = inttemp;
+					ath->overallScore = atoi(token);
 					break;
 				//case 12 n'est pas necessaire
 				case 13:
-					ath->score18_1 = inttemp;
+					ath->score18_1 = atoi(token);
 					break;
 				//case 14 n'est pas necessaire
 				//case 15 n'est pas necessaire
 				case 16:
-					ath->score18_2 = inttemp;
+					ath->score18_2 = atoi(token);
 					break;
 				//case 17 n'est pas necessaire
 				//case 18 n'est pas necessaire
 				case 19:
-					ath->score18_2a = inttemp;
+					ath->score18_2a = atoi(token);
 					break;
 				//case 20 n'est pas necessaire
 				//case 21 n'est pas necessaire
 				case 22:
-					ath->score18_3 = inttemp;
+					ath->score18_3 = atoi(token);
 					break;
 				//case 23 n'est pas necessaire
 				//case 24 n'est pas necessaire
 				case 25:
-					ath->score18_4 = inttemp;
+					ath->score18_4 = atoi(token);
 					break;
 				//case 26 n'est pas necessaire
 				//case 27 n'est pas necessaire
 				case 28:
-					ath->score18_5 = inttemp;
+					ath->score18_5 = atoi(token);
 					break;
 				//case 29 n'est pas necessaire
 				//case 30 n'est pas necessaire
 			}
-			
 			index++;
             token = strtok_new(NULL, CSV_DELIMITERS);
         }
@@ -224,10 +171,4 @@ void read_csv_file(const char * filename, int maxLine, ListeTop50 liste50[],
 	
 	chargementTexte(100);
     fclose(fp);
-	
-    for(unsigned int i = 0; i < CSV_NB_FIELDS; i++)
-    {
-        free(CSV_HEADER_FIELDS[i]);
-    }
-    free(CSV_HEADER_FIELDS);
 }

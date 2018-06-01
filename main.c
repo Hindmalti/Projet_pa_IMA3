@@ -26,7 +26,7 @@ int main(int argc, char * argv[]){
 	if(nAth == -1)
 		return 2; // arret du programme code 2
     int listeHashSize = nAth/3; // /3 -> en moyenne 3 athletes qui ont le meme hash
-    int listeTop50Size = nAth > 300 ? nAth/300 : 1; // 300 athletes max dans chaque segment des listes TOP 50
+    int listeTop50Size = nAth > 100 ? (nAth/100) + 1 : 1; // 300 athletes max dans chaque segment des listes TOP 50
 	
     ListeTop50 listeTop50[listeTop50Size];
     ListeHash listeHashID[listeHashSize];
@@ -42,6 +42,9 @@ int main(int argc, char * argv[]){
 	read_csv_file(argv[1], nAth, listeTop50, listeTop50Ep, listeTop50Size,
 			listeHashID, listeHashSize, listeHashNom, listeHashSize);
 	
+	
+	/*ajoutAthlete(liste50, listeTop50Ep, whichListeTop50, listeHashID, listeHashIDSize, listeHashNom,
+			listeHashNomSize, ath);*/
 	
     
 	// Test de requetes sur les listes de hachage
