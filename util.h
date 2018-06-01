@@ -21,9 +21,9 @@ void printHashId(ListeHash liste[], int listeSize, unsigned int athID);
 
 void printHashNom(ListeHash liste[], int listeSize, char *lastName);
 
-void printTopSalle(ListeTop50 liste[], unsigned int salleId);
+void printTopSalle(ListeTop50 liste[], int listeSize, unsigned int salleId);
 
-void printTopSalleLille(ListeTop50 liste[]);
+void printTopSalleLille(ListeTop50 liste[], int listeSize);
 
 void tiret(int n);
 

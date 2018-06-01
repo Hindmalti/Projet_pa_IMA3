@@ -231,26 +231,3 @@ void read_csv_file(const char * filename, int maxLine, ListeTop50 liste50[],
     }
     free(CSV_HEADER_FIELDS);
 }
-
-/*void usage(const char * prog_name)
-{
-    printf("Usage is %s your_csv_file\n\n", prog_name);
-}*/
-
-/*int main(int argc, char * argv[])
-{
-    if (2 != argc)
-    {
-        usage(argv[0]);
-        return 0;
-    }
-
-    read_csv_file(argv[1]);
-    for(unsigned int i = 0; i < CSV_NB_FIELDS; i++)
-    {
-        free(CSV_HEADER_FIELDS[i]);
-    }
-    free(CSV_HEADER_FIELDS);
-
-    return 0;
-}*/

@@ -59,7 +59,7 @@ int main(int argc, char * argv[]){
 	int quit = 0;
 	while(quit != 1){
 		printf("\n\n");
-		tiret(30);
+		tiret(70);
 		
 		printf("Veuillez entrer une commande (entre 1 et 9) : ");
 		// demande de commande
@@ -75,7 +75,7 @@ int main(int argc, char * argv[]){
 		switch(numCommande){
 			case 1:{
 				printf(" *** Affichage du TOP 50 :\n\n");
-				printf("%2.2s %15.15s %15.15s %10.10s\n\n", "##", "NOM DE FAMILLE", "PRENOM", "SCORE");
+				printf("%2.2s %20.20s %20.20s %10.10s\n\n", "##", "NOM DE FAMILLE", "PRENOM", "SCORE");
 				printTop50(listeTop50, listeTop50Size);
 				break;
 			}
@@ -85,7 +85,7 @@ int main(int argc, char * argv[]){
 					break;
 				}
 				printf(" *** Affichage du TOP 50 %s :\n\n", buffer[2] == 'M' ? "masculin" : "feminin");
-				printf("%2.2s %15.15s %15.15s %10.10s\n\n", "##", "NOM DE FAMILLE", "PRENOM", "SCORE");
+				printf("%2.2s %20.20s %20.20s %10.10s\n\n", "##", "NOM DE FAMILLE", "PRENOM", "SCORE");
 				printTop50Genre(listeTop50, listeTop50Size, buffer[2]);
 				break;
 			}
@@ -98,7 +98,7 @@ int main(int argc, char * argv[]){
 					break;
 				}
 				printf(" *** Affichage du TOP 50 de la region ayant pour id %d :\n\n", id);
-				printf("%2.2s %15.15s %15.15s %10.10s\n\n", "##", "NOM DE FAMILLE", "PRENOM", "SCORE");
+				printf("%2.2s %20.20s %20.20s %10.10s\n\n", "##", "NOM DE FAMILLE", "PRENOM", "SCORE");
 				printTop50Region(listeTop50, listeTop50Size, id);
 				break;
 			}
@@ -111,7 +111,7 @@ int main(int argc, char * argv[]){
 					break;
 				}
 				printf(" *** Affichage du TOP 50 de l'etape ayant pour id %d :\n\n", ep);
-				printf("%2.2s %15.15s %15.15s %14.14s %d\n\n", "##", "NOM DE FAMILLE", "PRENOM", "SCORE EPREUVE", ep);
+				printf("%2.2s %20.20s %20.20s %14.14s %d\n\n", "##", "NOM DE FAMILLE", "PRENOM", "SCORE EPREUVE", ep);
 				printTop50Epreuve(listeTop50Ep, listeTop50Size, ep);
 				break;
 			}
@@ -124,8 +124,6 @@ int main(int argc, char * argv[]){
 					break;
 				}
 				printf(" *** Recherche de l'athlete ayant pour id %d :\n\n", id);
-				printf("%10.10s %15.15s %15.15s %4.4s %3.3s %8.8s %8.8s %11.11s %11.11s %11.11s %11.11s %11.11s %11.11s\n",
-						"ID", "NOM DE FAMILLE", "PRENOM", "SEXE", "AGE", "TAILLE m", "POIDS kg", "SCORE 18.1", "SCORE 18.2", "SCORE 18.2a", "SCORE 18.3", "SCORE 18.4", "SCORE 18.5");
 				printHashId(listeHashID, listeHashSize, id);
 				break;
 			}
@@ -153,16 +151,16 @@ int main(int argc, char * argv[]){
 					break;
 				}
 				printf(" *** Affichage du classement de la salle ayant pour id %d :\n\n", id);
-				printf("%3.3s %15.15s %15.15s %10.10s\n\n", "###", "NOM DE FAMILLE", "PRENOM", "SCORE");
-				printTopSalle(listeTop50, id);
+				printf("%3.3s %20.20s %20.20s %10.10s\n\n", "###", "NOM DE FAMILLE", "PRENOM", "SCORE");
+				printTopSalle(listeTop50, listeTop50Size, id);
 				break;
 			}
-			/*case 8:{
+			case 8:{
 				printf(" *** Affichage du classement des salles de Lille :\n\n");
-				printf("%3.3s %15.15s %15.15s %10.10s\n\n", "###", "NOM DE FAMILLE", "PRENOM", "SCORE");
-				printTopSalleLille(listeTop50);
+				printf("%3.3s %20.20s %20.20s %10.10s\n\n", "###", "NOM DE FAMILLE", "PRENOM", "SCORE");
+				printTopSalleLille(listeTop50, listeTop50Size);
 				break;
-			}*/
+			}
 			case 9:{
 				printf("Le programme va maintenant s'arreter...\n");
 				quit = 1;

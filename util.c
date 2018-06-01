@@ -5,7 +5,7 @@
 
 void printAthleteTop50(Athlete *ptr){
     if(ptr != NULL){
-        printf("%15.15s %15.15s %10d\n", ptr->lastName, ptr->firstName, ptr->overallScore); 
+        printf("%20.20s %20.20s %10d\n", ptr->lastName, ptr->firstName, ptr->overallScore); 
     }
 }
 
@@ -29,7 +29,7 @@ void printAthleteTop50Ep(Athlete *ptr, int epreuveId){
 				score = ptr->score18_5;
 				break;
 		}
-        printf("%15.15s %15.15s %16d\n", ptr->lastName, ptr->firstName, score); 
+        printf("%20.20s %20.20s %16d\n", ptr->lastName, ptr->firstName, score); 
     }
 }
 
@@ -249,7 +249,7 @@ void printHashId(ListeHash liste[], int listeSize, unsigned int athID){
 	Athlete *ath = rechercheAthleteID(liste, listeSize, athID);
 	printf("%10.10s %15.15s %15.15s  %4.4s  %3.3s  %8.8s  %8.8s\n",
 			"ID", "NOM DE FAMILLE", "PRENOM", "SEXE", "AGE", "TAILLE m", "POIDS kg");
-	printf("%10d %15.15s %15.15s     %c %4d %7.2f m %6d kg\n",
+	printf("%10d %15.15s %15.15s     %c %4d %7.2f m %6d kg\n\n",
 			ath->athId, ath->lastName, ath->firstName, ath->gender, ath->age,
 			ath->height, ath->weight);
 	printf("%11.11s %11.11s %12.12s %11.11s %11.11s %11.11s\n",
@@ -276,37 +276,115 @@ void printHashNom(ListeHash liste[], int listeSize, char *lastName){
 			ath->score18_4, ath->score18_5);
 }
 
-void printTopSalle(ListeTop50 liste[], unsigned int salleId){
-    ElementTop50 *element = liste.premier;
-	int i = 0;
-    while(element != NULL){
-		if(element->ath.affiliateId == salleId){
-			printf("%3.3d ", i+1);
-			printAthleteTop50(&(element->ath));
-			i++;
+void printTopSalle(ListeTop50 liste[], int listeSize, unsigned int salleId){
+	ElementTop50 *elements[listeSize];
+	for(int i = 0; i < listeSize; i++){
+		elements[i] = liste[i].premier;
+	}
+	
+	int count = 0;
+	int allElementsNULL;
+    do{
+		//selectionne dans les elements uniquement la categorie recherchee
+		int ok = 0;
+		while(ok == 0){
+			ok = 1;
+			for(int i = 0; i < listeSize; i++){
+				if(elements[i] != NULL && elements[i]->ath.affiliateId != salleId){
+					elements[i] = elements[i]->suivant;
+					ok = 0;
+				}
+			}
 		}
-        element = element->suivant;
-    }
+		// check si tous les elements sont null
+		allElementsNULL = 1;
+		for(int i = 0; i < listeSize; i++){
+			if(elements[i] != NULL){
+				allElementsNULL = 0;
+				break;
+			}
+		}
+		if(allElementsNULL == 1)
+			break;
+		
+		// trouve le plus grand score entre les elements
+		int save = 0;
+		for(int i = 1; i < listeSize; i++){
+			// au debut (save = 0), elements[save] peut être NULL
+			// on repousse le probleme jusqu'a elements[save] != NULL
+			if(elements[save] == NULL){
+				save = i;
+				continue;
+			}
+			if(elements[i] != NULL && elements[save]->ath.overallScore < elements[i]->ath.overallScore)
+				save = i;
+		}
+		// affiche le prochain
+		printf("%3.3d ", count+1);
+        printAthleteTop50(&(elements[save]->ath));
+        elements[save] = elements[save]->suivant;
+		count++;
+    }while(allElementsNULL != 1);
 }
 
-/*void printTopSalleLille(ListeTop50 liste[]){
-    ElementTop50 *element = liste.premier;
-	int i = 0;
-    while(element != NULL){
-		if(element->ath.affiliateId == 19413
-				|| element->ath.affiliateId == 14534
-				|| element->ath.affiliateId == 7775
-				|| element->ath.affiliateId == 11610
-				|| element->ath.affiliateId == 12105
-				|| element->ath.affiliateId == 19352
-				|| element->ath.affiliateId == 21303){
-			printf("%2.2d ", i+1);
-			printAthleteTop50(&(element->ath));
-			i++;
+void printTopSalleLille(ListeTop50 liste[], int listeSize){
+	ElementTop50 *elements[listeSize];
+	for(int i = 0; i < listeSize; i++){
+		elements[i] = liste[i].premier;
+	}
+	
+	int count = 0;
+	int allElementsNULL;
+    do{
+		//selectionne dans les elements uniquement la categorie recherchee
+		int ok = 0;
+		while(ok == 0){
+			ok = 1;
+			for(int i = 0; i < listeSize; i++){
+				if(elements[i] != NULL
+						&& elements[i]->ath.affiliateId != 19413
+						&& elements[i]->ath.affiliateId != 14534
+						&& elements[i]->ath.affiliateId != 7775
+						&& elements[i]->ath.affiliateId != 11610
+						&& elements[i]->ath.affiliateId != 12105
+						&& elements[i]->ath.affiliateId != 19352
+						&& elements[i]->ath.affiliateId != 21303){
+					elements[i] = elements[i]->suivant;
+					ok = 0;
+				}
+			}
 		}
-        element = element->suivant;
-    }
-}*/
+		// check si tous les elements sont null
+		allElementsNULL = 1;
+		for(int i = 0; i < listeSize; i++){
+			if(elements[i] != NULL){
+				allElementsNULL = 0;
+				break;
+			}
+		}
+		if(allElementsNULL == 1)
+			break;
+		
+		// trouve le plus grand score entre les elements
+		int save = 0;
+		for(int i = 1; i < listeSize; i++){
+			// au debut (save = 0), elements[save] peut être NULL
+			// on repousse le probleme jusqu'a elements[save] != NULL
+			if(elements[save] == NULL){
+				save = i;
+				continue;
+			}
+			if(elements[i] != NULL && elements[save]->ath.overallScore < elements[i]->ath.overallScore)
+				save = i;
+		}
+		// affiche le prochain
+		printf("%3.3d ", count+1);
+        printAthleteTop50(&(elements[save]->ath));
+        elements[save] = elements[save]->suivant;
+		count++;
+    }while(allElementsNULL != 1);
+}
+
 void tiret(int n){
     // affiche n tirets
     int i = 0;
