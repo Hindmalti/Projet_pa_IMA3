@@ -3,6 +3,9 @@
 #include <string.h>
 #include "structure.h"
 
+/**
+ * Retourne la somme des valeurs ASCII de la chaine de caractere en parametre
+ */
 int asciis(char *word){
     int i = 0, h = 0;
     while(word[i] != '\0'){
@@ -12,14 +15,23 @@ int asciis(char *word){
     return h;
 }
 
+/**
+ * Retoune le hash associe a l'ID donne en argument
+ */
 int hash_int(int athID, int tableSize){
     return athID % tableSize;
 }
 
+/**
+ * Retoune le hash associe a la chiane de caratere donnee en argument
+ */
 int hash_word(char *word, int tableSize){
     return (asciis(word) % tableSize);
 }
 
+/**
+ * Initialise les listes chainees en s'assurant que leur premier element soit bien NULL
+ */
 void initialisation(ListeTop50 liste50[], ListeTop50Ep listeTop50Ep[][5],
 		int listeTop50Size, ListeHash listeHashID[], int listeHashIDSize,
 		ListeHash listeHashNom[], int listeHashNomSize){
@@ -35,6 +47,9 @@ void initialisation(ListeTop50 liste50[], ListeTop50Ep listeTop50Ep[][5],
 		listeHashNom[i].premier = NULL;
 }
 
+/**
+ * Detruit l'element en tete de la ListeHash donnee en argument
+ */
 void detruitTeteHash(ListeHash *liste){
 	ElementHash *element = liste->premier;
 	if(element != NULL){
@@ -43,6 +58,9 @@ void detruitTeteHash(ListeHash *liste){
 	}
 }
 
+/**
+ * Detruit l'element en tete de la ListeTop50 donnee en argument
+ */
 void detruitTeteTop50(ListeTop50 *liste){
 	ElementTop50 *element = liste->premier;
 	if(element != NULL){
@@ -51,6 +69,9 @@ void detruitTeteTop50(ListeTop50 *liste){
 	}
 }
 
+/**
+ * Ajoute un athlete dans la ListeTop50 trie par overallScore
+ */
 void ajoutAthleteTeteTrieeScore(ListeTop50 *liste, Athlete athlete){
     // cas particulier du debut de liste
     if(liste->premier == NULL || athlete.overallScore >= liste->premier->ath.overallScore){
@@ -88,6 +109,9 @@ void ajoutAthleteTeteTrieeScore(ListeTop50 *liste, Athlete athlete){
     return;
 }
 
+/**
+ * Ajoute un athlete dans la ListeTop50Ep (Epreuve) tire par score dans l'epreuve en question
+ */
 void ajoutAthleteTeteTrieeScoreEp(ListeTop50Ep *liste, Athlete *athlete, int epreuveId){
 	int scoreEpAthlete = 0;
 	int scoreEpPremierAth = 0;
@@ -176,6 +200,9 @@ void ajoutAthleteTeteTrieeScoreEp(ListeTop50Ep *liste, Athlete *athlete, int epr
     return;
 }
 
+/**
+ * Ajoute un athlete dans la ListeHash (ListeHashID ou ListeHashNom)
+ */
 void ajoutTeteListeHash(ListeHash *liste, Athlete *ath){
 	// creation de l'element
 	ElementHash *ajout = malloc(sizeof *ajout);
@@ -186,6 +213,9 @@ void ajoutTeteListeHash(ListeHash *liste, Athlete *ath){
 	liste->premier = ajout;
 }
 
+/**
+ * Couple a ajoutTeteListeHash, Ajoute un athlete dans la ListeHashID
+ */
 void ajoutAthleteHashID(ListeHash liste[], int listeSize, Athlete *ath){
 	// generation du hash
 	int hash = hash_int(ath->athId, listeSize);
@@ -193,6 +223,9 @@ void ajoutAthleteHashID(ListeHash liste[], int listeSize, Athlete *ath){
 	ajoutTeteListeHash(&liste[hash], ath);
 }
 
+/**
+ * Couple a ajoutTeteListeHash, Ajoute un athlete dans la ListeHashNom
+ */
 void ajoutAthleteHashNom(ListeHash liste[], int listeSize, Athlete *ath){
 	// generation du hash
 	int hash = hash_word(ath->lastName, listeSize);
@@ -200,6 +233,9 @@ void ajoutAthleteHashNom(ListeHash liste[], int listeSize, Athlete *ath){
 	ajoutTeteListeHash(&liste[hash], ath);
 }
 
+/**
+ * Retourne l'athlete dont l'ID est donne en argument
+ */
 Athlete* rechercheAthleteID(ListeHash liste[], int listeSize, unsigned int athID){
 	// generation du hash
 	int hash = hash_int(athID, listeSize);
@@ -213,6 +249,9 @@ Athlete* rechercheAthleteID(ListeHash liste[], int listeSize, unsigned int athID
     return NULL;
 }
 
+/**
+ * Retourne l'athlete dont le nom de famille est donne en argument
+ */
 Athlete* rechercheAthleteNom(ListeHash liste[], int listeSize, char *lastName){
 	// generation du hash
 	int hash = hash_word(lastName, listeSize);
@@ -226,6 +265,9 @@ Athlete* rechercheAthleteNom(ListeHash liste[], int listeSize, char *lastName){
     return NULL;
 }
 
+/**
+ * Ajoute un athlete dans toutes les listes (ListeTop50, ListeTop50Ep[5], ListeHashID et ListeHashNom)
+ */
 void ajoutAthlete(ListeTop50 liste50[], ListeTop50Ep listeTop50Ep[][5], int whichTop50,
 		ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[],
 		int listeHashNomSize, Athlete *ath){
@@ -242,6 +284,9 @@ void ajoutAthlete(ListeTop50 liste50[], ListeTop50Ep listeTop50Ep[][5], int whic
 	ajoutAthleteHashID(listeHashID, listeHashIDSize, ath);
 }
 
+/**
+ * Detruit toutes les listes et leurs donnees
+ */
 void detruireTout(ListeTop50 liste50[], int listeTop50Size, ListeHash listeHashID[],
 		int listeHashIDSize, ListeHash listeHashNom[], int listeHashNomSize){
 	// destruction de ListeHashID

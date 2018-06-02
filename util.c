@@ -3,12 +3,18 @@
 #include <string.h>
 #include "structure.h"
 
+/**
+ * Affiche un athlete (nom de famille, prenom et score)
+ */
 void printAthleteTop50(Athlete *ptr){
     if(ptr != NULL){
         printf("%20.20s %20.20s %10d\n", ptr->lastName, ptr->firstName, ptr->overallScore); 
     }
 }
 
+/**
+ * Affiche un athlete (nom de famille, prenom et score a l'epreuve)
+ */
 void printAthleteTop50Ep(Athlete *ptr, int epreuveId){
     if(ptr != NULL){
 		int score = 0;
@@ -33,6 +39,9 @@ void printAthleteTop50Ep(Athlete *ptr, int epreuveId){
     }
 }
 
+/**
+ * Affiche le TOP 50 general
+ */
 void printTop50(ListeTop50 liste[], int listeSize){
 	ElementTop50 *elements[listeSize];
 	for(int i = 0; i < listeSize; i++){
@@ -74,6 +83,9 @@ void printTop50(ListeTop50 liste[], int listeSize){
     }while(allElementsNULL != 1 && count < 50);
 }
 
+/**
+ * Affiche le TOP 50 feminin ou masculin
+ */
 void printTop50Genre(ListeTop50 liste[], int listeSize, char genre){
 	ElementTop50 *elements[listeSize];
 	for(int i = 0; i < listeSize; i++){
@@ -126,6 +138,9 @@ void printTop50Genre(ListeTop50 liste[], int listeSize, char genre){
     }while(allElementsNULL != 1 && count < 50);
 }
 
+/**
+ * Affiche le TOP 50 par region
+ */
 void printTop50Region(ListeTop50 liste[], int listeSize, unsigned int regionId){
 	ElementTop50 *elements[listeSize];
 	for(int i = 0; i < listeSize; i++){
@@ -178,6 +193,9 @@ void printTop50Region(ListeTop50 liste[], int listeSize, unsigned int regionId){
     }while(allElementsNULL != 1 && count < 50);
 }
 
+/**
+ * Affiche le TOP 50 par epreuve
+ */
 void printTop50Epreuve(ListeTop50Ep liste[][5], int listeSize, int epreuveId){
 	ElementTop50Ep *elements[listeSize];
 	for(int i = 0; i < listeSize; i++){
@@ -245,6 +263,9 @@ void printTop50Epreuve(ListeTop50Ep liste[][5], int listeSize, int epreuveId){
     }while(allElementsNULL != 1 && count < 50);
 }
 
+/**
+ * Trouve et affiche grace a son ID
+ */
 void printHashId(ListeHash liste[], int listeSize, unsigned int athID){
 	Athlete *ath = rechercheAthleteID(liste, listeSize, athID);
 	printf("%10.10s %15.15s %15.15s  %4.4s  %3.3s  %8.8s  %8.8s\n",
@@ -260,7 +281,9 @@ void printHashId(ListeHash liste[], int listeSize, unsigned int athID){
 			ath->score18_4, ath->score18_5);
 }
 
-
+/**
+ * Trouve et affiche grace a son nom de famille
+ */
 void printHashNom(ListeHash liste[], int listeSize, char *lastName){
 	Athlete *ath = rechercheAthleteNom(liste, listeSize, lastName);
 	printf("%10.10s %15.15s %15.15s  %4.4s  %3.3s  %8.8s  %8.8s\n",
@@ -276,6 +299,9 @@ void printHashNom(ListeHash liste[], int listeSize, char *lastName){
 			ath->score18_4, ath->score18_5);
 }
 
+/**
+ * Affiche le classement d'une salle
+ */
 void printTopSalle(ListeTop50 liste[], int listeSize, unsigned int salleId){
 	ElementTop50 *elements[listeSize];
 	for(int i = 0; i < listeSize; i++){
@@ -327,6 +353,9 @@ void printTopSalle(ListeTop50 liste[], int listeSize, unsigned int salleId){
     }while(allElementsNULL != 1);
 }
 
+/**
+ * Affiche le classement des salles de Lille
+ */
 void printTopSalleLille(ListeTop50 liste[], int listeSize){
 	ElementTop50 *elements[listeSize];
 	for(int i = 0; i < listeSize; i++){
@@ -385,6 +414,9 @@ void printTopSalleLille(ListeTop50 liste[], int listeSize){
     }while(allElementsNULL != 1);
 }
 
+/**
+ * Affiche n tirets et retourne a la ligne
+ */
 void tiret(int n){
     // affiche n tirets
     int i = 0;
@@ -394,6 +426,10 @@ void tiret(int n){
     printf("\n");
 }
 
+/**
+ * Affiche une barre de chargement en fonction du poucentage donne en parametre
+ * -1 en parametre initialise la barre de chargement
+ */
 void chargementTexte(int pourcent){
 	if(pourcent == -1){
 		printf("[                             ]   0%%");

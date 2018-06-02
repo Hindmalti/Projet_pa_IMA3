@@ -24,15 +24,20 @@ int main(int argc, char * argv[]){
 	
     int nAth = combienAthlete(argv[1]);
 	if(nAth == -1)
-		return 2; // arret du programme code 2
+		return 2; // arret du programme code 2 = erreur de lecture
     int listeHashSize = nAth/3; // /3 -> en moyenne 3 athletes qui ont le meme hash
-    int listeTop50Size = nAth > 100 ? (nAth/100) + 1 : 1; // 300 athletes max dans chaque segment des listes TOP 50
+    int listeTop50Size = nAth > 100 ? (nAth/100) + 1 : 1; // 100 athletes max dans chaque segment des listes TOP 50
 	
-    ListeTop50 listeTop50[listeTop50Size];
-    ListeHash listeHashID[listeHashSize];
-    ListeHash listeHashNom[listeHashSize];
-	ListeTop50Ep listeTop50Ep[listeTop50Size][5];
+	// la liste chainee "ListeTop50" a ete fractionnee en "listeTop50Size" morceaux pour optimiser le programme
+	// Ainsi, lors de l'ajout d'un nouvel athlete lors de la lecture du fichier csv, le programme n'a plus a parcourir
+	// un nombre colossal l'elements dans la liste mais seullement 100 element au maximum.
+    ListeTop50 listeTop50[listeTop50Size]; // questions 1, 2, 3, 7 et 8
+    ListeHash listeHashID[listeHashSize]; // question 5
+    ListeHash listeHashNom[listeHashSize]; // question 6
+	// pareil que pour "ListeTop50" mais pour 5 epreuves
+	ListeTop50Ep listeTop50Ep[listeTop50Size][5]; // question 4
 	
+	// initialise les listes correctement
 	initialisation(listeTop50, listeTop50Ep, listeTop50Size, listeHashID,
 			listeHashSize, listeHashNom, listeHashSize);
 	
@@ -43,46 +48,39 @@ int main(int argc, char * argv[]){
 			listeHashID, listeHashSize, listeHashNom, listeHashSize);
 	
 	
-	/*ajoutAthlete(liste50, listeTop50Ep, whichListeTop50, listeHashID, listeHashIDSize, listeHashNom,
-			listeHashNomSize, ath);*/
-	
-    
-	// Test de requetes sur les listes de hachage
-	/*printf("Test sur les listes de hachage...\n");
-	
-	printf("Recherche de l'id 17 :\n");
-    printAthlete(rechercheAthleteID(listeHashID, listeHashSize, 17));
-	printf("Recherche de du nom \"azdfgdfggd\" + \"dgdfgdf\"\n");
-    printAthlete(rechercheAthleteNom(listeHashNom, listeHashSize, "azdfgdfggd", "dgdfgdf"));
-    tiret(30);*/
-	
 	/* ----- EXECUTION INSTRUCTIONS -----*/
 	
-	char buffer[48];
-	int quit = 0;
+	char buffer[48]; // enregistre la demande
+	int quit = 0; // enregistre le demande de quitter le programme = commande 9
 	while(quit != 1){
+		// separation
 		printf("\n\n");
 		tiret(70);
 		
 		printf("Veuillez entrer une commande (entre 1 et 9) : ");
+		
 		// demande de commande
 		fgets(buffer, 48, stdin);
 		printf("\n\n");
 		
+		// obtiens le numero de la commande
 		int numCommande = buffer[0] - '0';
 		if(numCommande < 1 || numCommande > 9){
 			printf("Usage des commandes : [0-9] [argument]\n");
 			continue;
 		}
 		
+		// traitement de la commande
 		switch(numCommande){
 			case 1:{
+				// TOP 50 global
 				printf(" *** Affichage du TOP 50 :\n\n");
 				printf("%2.2s %20.20s %20.20s %10.10s\n\n", "##", "NOM DE FAMILLE", "PRENOM", "SCORE");
 				printTop50(listeTop50, listeTop50Size);
 				break;
 			}
 			case 2:{
+				// TOP 50 feminin / masculin
 				if(buffer[1] != ' ' || (buffer[2] != 'M' && buffer[2] != 'F')){
 					printf("Usage de la commande 2 : 2 [M ou F]\n");
 					break;
@@ -93,6 +91,7 @@ int main(int argc, char * argv[]){
 				break;
 			}
 			case 3:{
+				// TOP 50 par region
 				char temp1[46];
 				strncpy(temp1, buffer+2, 46);
 				int id = atoi(temp1);
@@ -106,6 +105,7 @@ int main(int argc, char * argv[]){
 				break;
 			}
 			case 4:{
+				// TOP 50 par etapes
 				char temp2[46];
 				strncpy(temp2, buffer+2, 46);
 				int ep = atoi(temp2);
@@ -119,6 +119,7 @@ int main(int argc, char * argv[]){
 				break;
 			}
 			case 5:{
+				// Recherce athlete par ID
 				char temp3[46];
 				strncpy(temp3, buffer+2, 46);
 				int id = atoi(temp3);
@@ -131,6 +132,7 @@ int main(int argc, char * argv[]){
 				break;
 			}
 			case 6:{
+				// Recherche athlete par nom de famille
 				char temp4[46];
 				strncpy(temp4, buffer+2, 46);
 				if(buffer[1] != ' ' || buffer[2] == '\n'){
@@ -146,6 +148,7 @@ int main(int argc, char * argv[]){
 				break;
 			}
 			case 7:{
+				// Classement par salle
 				char temp5[46];
 				strncpy(temp5, buffer+2, 46);
 				int id = atoi(temp5);
@@ -159,12 +162,14 @@ int main(int argc, char * argv[]){
 				break;
 			}
 			case 8:{
+				// Classement des salles de Lille
 				printf(" *** Affichage du classement des salles de Lille :\n\n");
 				printf("%3.3s %20.20s %20.20s %10.10s\n\n", "###", "NOM DE FAMILLE", "PRENOM", "SCORE");
 				printTopSalleLille(listeTop50, listeTop50Size);
 				break;
 			}
 			case 9:{
+				// Quitte le programme
 				printf("Le programme va maintenant s'arreter...\n");
 				quit = 1;
 				break;
@@ -175,7 +180,6 @@ int main(int argc, char * argv[]){
 	
 	// destruction de toutes les listes
 	printf("Destruction des listes...\n");
-	
 	detruireTout(listeTop50, listeTop50Size, listeHashID, listeHashSize, listeHashNom, listeHashSize);
 	
 	printf("Fin du programme.\n");

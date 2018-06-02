@@ -84,10 +84,12 @@ void read_csv_file(const char * filename, int maxLine, ListeTop50 liste50[],
 	chargementTexte(-1);
     while ( NULL != fgets(buffer, BUFFER_SIZE, fp) )
     {
+		// Affiche la barre de chargement
 		currentLigne++;
 		if(currentLigne % afficheLigne == 0)
 			chargementTexte((currentLigne * 100) / maxLine);
 		
+		// Coupe et sauvegarde un element de la ligne du csv
         char* token = strtok_new(buffer, CSV_DELIMITERS);
 		
 		int index = 0;
@@ -164,6 +166,8 @@ void read_csv_file(const char * filename, int maxLine, ListeTop50 liste50[],
 			index++;
             token = strtok_new(NULL, CSV_DELIMITERS);
         }
+		// whichListeTop50 determine dans quelle liste de liste chainee, l'athlete va se trouver
+		// (voir main -> ligne 31 pour plus de details)
 		int whichListeTop50 = (currentLigne * (listeTop50Size - 1)) / maxLine;
 		ajoutAthlete(liste50, listeTop50Ep, whichListeTop50, listeHashID, listeHashIDSize, listeHashNom,
 				listeHashNomSize, ath);

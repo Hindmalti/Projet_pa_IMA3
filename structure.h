@@ -4,6 +4,7 @@
 #include<stdlib.h>
 #include <string.h>
 
+// Definition d'un athlete
 typedef struct{
 	unsigned int athId; 
 	unsigned int regId;
@@ -38,6 +39,7 @@ typedef struct{
 	//unsigned int rank18_5;
 }Athlete;
 
+// Liste du TOP 50, sert aussi de liste memoire où les autres listes vont pouvoir referencer leur athletes
 typedef struct ElementTop50 ElementTop50;
 struct ElementTop50 {
     Athlete ath;
@@ -47,6 +49,7 @@ typedef struct {
     ElementTop50 *premier;
 } ListeTop50;
 
+// Liste du TOP 50 des epreuves
 typedef struct ElementTop50Ep ElementTop50Ep;
 struct ElementTop50Ep {
     Athlete *ath;
@@ -56,6 +59,7 @@ typedef struct {
     ElementTop50Ep *premier;
 } ListeTop50Ep;
 
+// Liste des hash tables pour les ID et les noms de familles
 typedef struct ElementHash ElementHash;
 struct ElementHash {
     Athlete *ath;
