@@ -252,14 +252,19 @@ Athlete* rechercheAthleteID(ListeHash liste[], int listeSize, unsigned int athID
 /**
  * Retourne l'athlete dont le nom de famille est donne en argument
  */
-Athlete* rechercheAthleteNom(ListeHash liste[], int listeSize, char *lastName){
+Athlete* rechercheAthleteNom(ListeHash liste[], int listeSize, char *lastName, int occurence){
 	// generation du hash
 	int hash = hash_word(lastName, listeSize);
     // recherche dans la liste des hashs similaires
     ElementHash *element = liste[hash].premier;
+	int i = 0;
     while(element != NULL){
-        if(strcmp(element->ath->lastName, lastName) == 0)
-            return element->ath;
+        if(strcmp(element->ath->lastName, lastName) == 0){
+			if(occurence != i)
+				i++;
+			else
+				return element->ath;
+		}
         element = element->suivant;
     }
     return NULL;

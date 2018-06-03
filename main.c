@@ -143,7 +143,7 @@ int main(int argc, char * argv[]){
 					if(temp4[i] == '\n')
 						temp4[i] = '\0';
 				}
-				printf(" *** Recherche de l'athlete ayant pour nom de famille %s :\n\n", temp4);
+				printf(" *** Recherche d'athletes ayant pour nom de famille %s :\n\n", temp4);
 				printHashNom(listeHashNom, listeHashSize, temp4);
 				break;
 			}

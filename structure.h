@@ -95,7 +95,7 @@ void ajoutAthleteHashNom(ListeHash liste[], int listeSize, Athlete *ath);
 
 Athlete* rechercheAthleteID(ListeHash liste[], int listeSize, unsigned int athID);
 
-Athlete* rechercheAthleteNom(ListeHash liste[], int listeSize, char *lastName);
+Athlete* rechercheAthleteNom(ListeHash liste[], int listeSize, char *lastName, int occurence);
 
 void ajoutAthlete(ListeTop50 liste50[], ListeTop50Ep listeTop50Ep[][5], int whichTop50,
 		ListeHash listeHashID[], int listeHashIDSize, ListeHash listeHashNom[],

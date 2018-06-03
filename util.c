@@ -285,18 +285,28 @@ void printHashId(ListeHash liste[], int listeSize, unsigned int athID){
  * Trouve et affiche grace a son nom de famille
  */
 void printHashNom(ListeHash liste[], int listeSize, char *lastName){
-	Athlete *ath = rechercheAthleteNom(liste, listeSize, lastName);
-	printf("%10.10s %15.15s %15.15s  %4.4s  %3.3s  %8.8s  %8.8s\n",
-			"ID", "NOM DE FAMILLE", "PRENOM", "SEXE", "AGE", "TAILLE m", "POIDS kg");
-	printf("%10d %15.15s %15.15s     %c %4d %7.2f m %6d kg\n\n",
-			ath->athId, ath->lastName, ath->firstName, ath->gender, ath->age,
-			ath->height, ath->weight);
-	printf("%11.11s %11.11s %12.12s %11.11s %11.11s %11.11s\n",
-			"SCORE 18.1", "SCORE 18.2", "SCORE 18.2a", "SCORE 18.3", "SCORE 18.4",
-			"SCORE 18.5");
-	printf("%11d %11d %12d %11d %11d %11d\n",
-			ath->score18_1, ath->score18_2, ath->score18_2a, ath->score18_3,
-			ath->score18_4, ath->score18_5);
+	Athlete *ath = rechercheAthleteNom(liste, listeSize, lastName, 0);
+	int i = 0;
+	while(ath != NULL){
+		if(i != 0)
+			printf("\n\n\n\n");
+		
+		printf("%10.10s %15.15s %15.15s  %4.4s  %3.3s  %8.8s  %8.8s\n",
+				"ID", "NOM DE FAMILLE", "PRENOM", "SEXE", "AGE", "TAILLE m", "POIDS kg");
+		printf("%10d %15.15s %15.15s     %c %4d %7.2f m %6d kg\n\n",
+				ath->athId, ath->lastName, ath->firstName, ath->gender, ath->age,
+				ath->height, ath->weight);
+		printf("%11.11s %11.11s %12.12s %11.11s %11.11s %11.11s\n",
+				"SCORE 18.1", "SCORE 18.2", "SCORE 18.2a", "SCORE 18.3", "SCORE 18.4",
+				"SCORE 18.5");
+		printf("%11d %11d %12d %11d %11d %11d\n",
+				ath->score18_1, ath->score18_2, ath->score18_2a, ath->score18_3,
+				ath->score18_4, ath->score18_5);
+		
+		// athlete suivant qui a le meme nom
+		i++;
+		ath = rechercheAthleteNom(liste, listeSize, lastName, i);
+	}
 }
 
 /**
